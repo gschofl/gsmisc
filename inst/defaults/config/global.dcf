@@ -1,0 +1,9 @@
+data_loading: TRUE
+cache_loading: TRUE
+recursive_loading: FALSE
+munging: TRUE
+logging: FALSE
+load_libraries: TRUE
+libraries: reshape2, plyr, ggplot2
+as_factors: FALSE
+data_tables: FALSE
