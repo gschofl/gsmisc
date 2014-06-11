@@ -1,16 +1,13 @@
-# rmisc
+# gsmisc
 
 Various utility functions that I reuse in different packages or on which I rely when using R interactively.
 
-The easiest way to install `rmisc` is with devtools:
+The easiest way to install `gsmisc` is with devtools:
 
 ```R
 library(devtools)
-install_github("rmisc", "gschofl")
+install_github("gschofl/gsmisc")
 ```
-
-Note that this packages makes use of the C++11 standard. For it to compile `Sys.setenv("PKG_CXXFLAGS"="-std=c++11")` must be set before attempting instalation.
-
 
 ## Tools
 
@@ -25,6 +22,6 @@ Available function include:
 * `linebreak()`: format paragraphs.
 * Apply XPath expressions to XML documents: `xvalue()`, `xname()`, `xattr()`, `xset()`
 * Customized package installation: `install_packages()`, `update_packages()`
-* Some convenience functions: `require.all()`, `load.all()`, `open_Rproj()`
+* Some convenience functions: `require.all()`, `load.all()`, `createProject()`
 
 

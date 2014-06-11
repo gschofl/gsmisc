@@ -7,7 +7,7 @@ using namespace Rcpp;
 
 // bind_list
 List bind_list(List& L, int n_col, std::vector<std::string> col_classes);
-RcppExport SEXP rmisc_bind_list(SEXP LSEXP, SEXP n_colSEXP, SEXP col_classesSEXP) {
+RcppExport SEXP gsmisc_bind_list(SEXP LSEXP, SEXP n_colSEXP, SEXP col_classesSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {

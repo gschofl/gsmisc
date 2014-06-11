@@ -1,5 +1,5 @@
 #' @import Rcpp
-#' @useDynLib rmisc
+#' @useDynLib gsmisc
 NULL
 
 #' Bind a list of data frames
@@ -18,7 +18,7 @@ NULL
 rBind <- function(L) {
   n_col <- length(x[[1L]])
   col_classes <- vapply(x[[1L]], class, character(1L), USE.NAMES=FALSE)
-  res <- .Call('rmisc_bind_list', PACKAGE = 'rmisc', L, n_col, col_classes)
+  res <- .Call('gsmisc_bind_list', PACKAGE = 'gsmisc', L, n_col, col_classes)
   attr(res, "row.names")  <- seq_len(length(res[[1L]]))
   res
 }
@@ -117,8 +117,8 @@ purgeNA <- function (df, cols) {
 #' @name with
 #' @examples
 #' \dontrun{
-#' rmisc <- as.package("~/R/Projects/Devel/rmisc")
-#' with_cpp11(devtools::build(rmisc))
+#' gsmisc <- as.package("~/R/Projects/Devel/gsmisc")
+#' with_cpp11(devtools::build(gsmisc))
 #' }
 NULL
 

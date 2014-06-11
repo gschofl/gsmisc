@@ -2,6 +2,6 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 bind_list <- function(L, n_col, col_classes) {
-    .Call('rmisc_bind_list', PACKAGE = 'rmisc', L, n_col, col_classes)
+    .Call('gsmisc_bind_list', PACKAGE = 'gsmisc', L, n_col, col_classes)
 }
 

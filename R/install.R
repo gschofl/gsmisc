@@ -18,7 +18,7 @@ bioc <- function() {
 #' @param ... Further arguments passed on to \code{\link{biocLite}}.
 #' 
 #' @export
-install_packages <- function(pkgs, destdir = getOption("rmisc.pkgs"), update = FALSE, ...) {
+install_packages <- function(pkgs, destdir = getOption("gsmisc.pkgs"), update = FALSE, ...) {
   assert_that(!missing(pkgs), is.character(pkgs))
   if (!require("BiocInstaller", character.only = TRUE)) bioc()
   BiocInstaller::biocLite(pkgs, suppressUpdates=TRUE, destdir=destdir, ...)
@@ -41,7 +41,7 @@ install_packages <- function(pkgs, destdir = getOption("rmisc.pkgs"), update = F
 #' 
 #'  @param destdir Where the source code goes
 #'  @export
-update_packages <- function(destdir = getOption("rmisc.pkgs")) {
+update_packages <- function(destdir = getOption("gsmisc.pkgs")) {
   if (!is.null(destdir)) {
     destdir <- normalizePath(destdir)
     cwd <- setwd(destdir)
@@ -103,7 +103,7 @@ extract_packages <- function(destdir) {
 #'  @export
 update_github <- function() {
   assert_that(require(devtools))
-  pkgs <- c("rmisc", "reutils", "biofiles", "blastr", "ncbi", "genoslideR")
+  pkgs <- c("gsmisc", "reutils", "biofiles", "blastr", "ncbi", "genoslideR")
   cat("Update packages:\n")
   cat(sprintf("%s) %s", seq_along(pkgs), pkgs), sep="\n")
   
