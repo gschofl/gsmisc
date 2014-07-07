@@ -24,7 +24,9 @@ rproj <- function(pkg, path = 'all') {
     action <- paste(rstudio, rproj)
     system(action, wait=FALSE, ignore.stderr=TRUE)
   }
-  
+  "%||%" <- function (a, b) {
+    if (is.null(a)) b else a
+  }
   Rproj.template <- c("Version: 1.0", "", "RestoreWorkspace: Default",
                       "SaveWorkspace: Default",  "AlwaysSaveHistory: Default",
                       "", "EnableCodeIndexing: Yes",  "UseSpacesForTab: Yes",
@@ -32,13 +34,12 @@ rproj <- function(pkg, path = 'all') {
                       "RnwWeave: knitr", "LaTeX: pdfLaTeX")
 
   if (is.name(pkg)) {
-    pkg <- trim(deparse(substitute(pkg)), trim="\"")  
-  } else if (is.string(pkg)) {
+    pkg <- gsub("^\"|\"$", '', deparse(substitute(pkg)))
+  } else if (is.character(pkg) && length(pkg) == 1) {
     pkg <- pkg
   } else {
     stop("'pkg' must be a symbol or a string")
   }
-  
   devel.path <- getOption('gsmisc.devel') %||% '.'
   proj.path  <- getOption('gsmisc.proj') %||% '.'
   pkgs.path  <- getOption('gsmisc.pkgs') %||% '.'
@@ -51,7 +52,7 @@ rproj <- function(pkg, path = 'all') {
   
   pkg_path <- grep(pkg, dir(path, full.names=TRUE, ignore.case=TRUE), value=TRUE)
   
-  while (nunique(basename(pkg_path)) > 1L) {
+  while (length(unique(basename(pkg_path))) > 1L) {
     pkg_path <- unique(dirname(pkg_path))
   }
   
@@ -116,7 +117,7 @@ createProject <- function(project = 'myProject',
   if (packrat) {
     stopifnot(require("packrat", character.only = TRUE))
     packrat::init(project = project_name)
-    packrat::install_github("gschofl/gsmisc")
+    install.packages("knitr")
   }
   if (open) {
     rproj(eval(project), path = path)
