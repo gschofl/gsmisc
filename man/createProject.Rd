@@ -5,7 +5,8 @@
 project.}
 \usage{
 createProject(project = "myProject", path = getOption("gsmisc.proj"),
-  merge_strategy = c("require.empty", "allow.non.conflict"), open = TRUE)
+  merge_strategy = c("require.empty", "allow.non.conflict"), open = TRUE,
+  packrat = FALSE)
 }
 \arguments{
 \item{project}{A character vector with the name of the project directory.}
@@ -18,7 +19,9 @@ If \code{"force.empty"}, the target directory must be empty;
 if \code{"allow.non.conflict"}, the method succeeds if no files or
 directories with the same name exist in the target directory.}
 
-\item{open}{If \code{TRUE}, open the newly created project in RStudio}
+\item{open}{If \code{TRUE}, open the newly created project in RStudio.}
+
+\item{packrat}{If \code{TRUE}, create a \href{http://rstudio.github.io/packrat/walkthrough.html}{packrat} project.}
 }
 \value{
 No value is returned; this function is called for its side effects.

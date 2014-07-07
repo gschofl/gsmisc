@@ -83,7 +83,8 @@ rproj <- function(pkg, path = 'all') {
 #'   If \code{"force.empty"}, the target directory must be empty;
 #'   if \code{"allow.non.conflict"}, the method succeeds if no files or
 #'   directories with the same name exist in the target directory.
-#' @param open If \code{TRUE}, open the newly created project in RStudio
+#' @param open If \code{TRUE}, open the newly created project in RStudio.
+#' @param packrat If \code{TRUE}, create a \href{http://rstudio.github.io/packrat/walkthrough.html}{packrat} project.
 #' @return No value is returned; this function is called for its side effects.
 #' @details  If the target directory does not exist, it is created.  Otherwise,
 #'   it can only contain files and directories allowed by the merge strategy.
@@ -94,7 +95,8 @@ rproj <- function(pkg, path = 'all') {
 createProject <- function(project = 'myProject',
                           path = getOption("gsmisc.proj"),
                           merge_strategy = c("require.empty", "allow.non.conflict"),
-                          open = TRUE) {
+                          open = TRUE,
+                          packrat = FALSE) {
   stopifnot(require('ProjectTemplate'), !missing(project))
   project_name <- normalizePath(file.path(path, project), mustWork = FALSE)
   assert_that(is.writeable(dirname(project_name)))
@@ -110,7 +112,12 @@ createProject <- function(project = 'myProject',
     .create_existing_project(template_path, project_name, merge_strategy)
   } else {
     .create_new_project(template_path, project_name)
-  }    
+  }
+  if (packrat) {
+    stopifnot(require("packrat", character.only = TRUE))
+    packrat::init(project = project_name)
+    packrat::install_github("gschofl/gsmisc")
+  }
   if (open) {
     rproj(eval(project), path = path)
   }
