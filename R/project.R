@@ -117,7 +117,6 @@ createProject <- function(project = 'myProject',
   if (packrat) {
     stopifnot(require("packrat", character.only = TRUE))
     packrat::init(project = project_name)
-    install.packages("knitr")
   }
   if (open) {
     rproj(eval(project), path = path)
