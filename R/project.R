@@ -152,6 +152,9 @@ createProject <- function(project = 'myProject',
 
   file.copy(from = system.file('defaults/config/template.rproject', package = 'gsmisc'),
             to = file.path(project.path, paste0(basename(project.path), '.Rproj')))
+  
+  file.copy(from = system.file('defaults/config/template.Rmd', package = 'gsmisc'),
+            to = file.path(project.path, 'reports/report.Rmd'))
 }
 
 .create_new_project <- function(template.path, project.name) {
