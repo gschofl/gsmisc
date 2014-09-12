@@ -1,0 +1,62 @@
+---
+title: "Untitled"
+author: "Author"
+date: "Date"
+output:
+  pdf_document:
+    fig_caption: yes
+    highlight: kate
+    number_sections: yes
+    toc: yes
+    toc_depth: 4
+  html_document:
+    fig_caption: yes
+    highlight: kate
+    number_sections: yes
+    theme: united
+    toc: yes
+---
+
+<link href="custom.css", rel="stylesheet">
+
+```{r setup, include=FALSE}
+library('ProjectTemplate')
+library('knitr')
+opts_knit$set(root.dir = '..', output.dir = '.', verbose = TRUE, width = 80)
+wd <- basename(getwd())
+if (wd %in% c("src", "doc", "reports")) {
+  setwd('..')
+}
+load.project()
+```
+
+## Project overview
+
+An example table:
+
+First Header | Second Header
+-------------|--------------
+Content 1    | Content 2
+Content 3    | Content 4
+
+## Load packages and data
+```{r load_packages, message=FALSE, results='hide'}
+library("assertthat")
+library("gsmisc")
+library("ggplot2")
+library("data.table")
+
+```
+
+## Data preparation 
+
+## Exploratory Analysis and Diagnostics
+
+## Q 1
+
+## Q 2
+
+## Review
+
+
+

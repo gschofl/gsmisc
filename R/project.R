@@ -155,6 +155,9 @@ createProject <- function(project = 'myProject',
   
   file.copy(from = system.file('defaults/config/template.Rmd', package = 'gsmisc'),
             to = file.path(project.path, 'reports/report.Rmd'))
+  
+  file.copy(from = system.file('defaults/config/custom.css', package = 'gsmisc'),
+            to = file.path(project.path, 'reports/custom.css'))
 }
 
 .create_new_project <- function(template.path, project.name) {

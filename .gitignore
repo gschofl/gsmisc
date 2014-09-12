@@ -7,7 +7,6 @@ data/
 doc/
 playground/
 *.html
-*.Rmd
 *.so
 *.o
 
