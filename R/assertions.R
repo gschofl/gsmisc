@@ -165,13 +165,17 @@ on_failure(is.installed) <- function(call, env) {
 
 #' Reverse Value Matching
 #' 
-#' Complement of \code{\link{\%in\%}}.
+#' Negation of the \code{\link{\%in\%}} operator.
 #' 
 #' @usage x \%ni\% y
-#' @param x A vector
-#' @param y A vector
+#' @param x The values to be matched.
+#' @param y The values to \emph{not} be matched against.
+#' @return A logical vector.
 #' @rdname ni
 #' @export
+#' @examples
+#' 1:5 %ni% c(3,4,5)
+#' @keywords utilities
 "%ni%" <- Negate(`%in%`)
 
 

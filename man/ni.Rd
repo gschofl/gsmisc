@@ -6,11 +6,18 @@
 x \%ni\% y
 }
 \arguments{
-\item{x}{A vector}
+\item{x}{The values to be matched.}
 
-\item{y}{A vector}
+\item{y}{The values to \emph{not} be matched against.}
+}
+\value{
+A logical vector.
 }
 \description{
-Complement of \code{\link{\%in\%}}.
+Negation of the \code{\link{\%in\%}} operator.
 }
+\examples{
+1:5 \%ni\% c(3,4,5)
+}
+\keyword{utilities}
 
