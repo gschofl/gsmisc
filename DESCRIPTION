@@ -17,7 +17,8 @@ Imports:
     grid,
     RCurl,
     RSQLite,
-    XML
+    XML,
+    xtable
 Suggests:
     BiocInstaller,
     ProjectTemplate,
@@ -31,6 +32,7 @@ Collate:
     'file-compare.R'
     'flatten.R'
     'install.R'
+    'latex.R'
     'linebreak.R'
     'misc.R'
     'multiplot.R'
