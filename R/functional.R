@@ -6,11 +6,16 @@ NULL
 
 #' Partial function application.
 #' 
+#' Modify a function by pre-applying some of the arguments.
+#'   
 #' @param fn Function to apply partially.
-#' @param \dots Arguments that should be applied to \code{fn}
+#' @param \dots Named arguments that should be applied to \code{fn}
 #' @param .env the environment of the created function. Defaults to
 #'   \code{\link{parent.frame}}.
 #' @export
+#' @examples
+#' mean1 <- Partial(mean, na.rm = TRUE)
+#' mean1(c(1,2,3,NA,4))
 Partial <- function(fn, ..., .env = parent.frame()) {
   assert_that(is.function(fn))
   fcall <- substitute(fn(...))
@@ -28,14 +33,14 @@ Partial <- function(fn, ..., .env = parent.frame()) {
 #' the penultimate argument and so on.
 #'
 #' @param \dots The functions to be composed.
-#' @param fn1,fn2 Two functions to compose (infix notaion)
+#' @param g,f Two functions to compose (infix notaion)
 #' @export
 #' @examples
 #'  x <- c(1,1,2,2,3,3)
 #'  nunique <- Compose(length, unique)
 #'  nunique(x) == length(unique(x))
 #'  
-#'  ## usefull in lapply constructs
+#'  ## useful in lapply constructs
 #'  sapply(mtcars, length %.% unique)
 Compose <- function(...) {
   fns <- lapply(compact(list(...)), match.fun)
@@ -48,7 +53,6 @@ Compose <- function(...) {
   }
 }
 
-
 #' @rdname Compose
 #' @export
 "%.%" <- function(g, f) {
@@ -57,13 +61,9 @@ Compose <- function(...) {
   function(...) g(f(...))
 }
 
-
-#' Compose functions
-#'
-#' Same as \code{\link{Compose}}, except that it applies the functions in
-#' argument-list order.
-#'
-#' @param \dots The functions to be composed.
+#' @details \code{Sequence} is the same as \code{Compose}, except that it
+#' applies the functions in argument-list order.
+#' @rdname Compose
 #' @export
 Sequence <- function(...) {
   fns <- lapply(list(...), match.fun)

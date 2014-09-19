@@ -11,9 +11,13 @@ Partial(fn, ..., .env = parent.frame())
 \item{.env}{the environment of the created function. Defaults to
 \code{\link{parent.frame}}.}
 
-\item{\dots}{Arguments that should be applied to \code{fn}}
+\item{\dots}{Named arguments that should be applied to \code{fn}}
 }
 \description{
-Partial function application.
+Modify a function by pre-applying some of the arguments.
+}
+\examples{
+mean1 <- Partial(mean, na.rm = TRUE)
+mean1(c(1,2,3,NA,4))
 }
 
