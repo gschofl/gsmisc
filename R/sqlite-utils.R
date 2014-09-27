@@ -100,7 +100,7 @@ db_count <- function(con, tbl) {
 #' @export
 #' @keywords internal
 db_bulk_insert <- function(con, tbl, df) {
-  sql <- sprintf("insert into %s vales (%s)", tbl,
+  sql <- sprintf("insert into %s values (%s)", tbl,
                  paste0("$", names(df), collapse=", "))
   dbBeginTransaction(con)
   dbSendPreparedQuery(con, sql, df)

@@ -9,7 +9,7 @@ Author: Gerhard Schöfl
 Maintainer: Gerhard Schöfl <gerhard.schofl@gmail.de>
 Description: A collection conveniance functions.
 License: MIT + file LICENSE
-Encoding: latin1
+Encoding: utf8
 Depends:
     R (>= 3.1.0)
 Imports:
@@ -21,6 +21,8 @@ Imports:
     xtable
 Suggests:
     BiocInstaller,
+    data.table,
+    lubridate,
     ProjectTemplate,
     packrat
 Collate:
@@ -41,5 +43,6 @@ Collate:
     'string-utils.R'
     'strmatch.R'
     'system.R'
+    'tanken.R'
     'utils.R'
     'xml-utils.R'
