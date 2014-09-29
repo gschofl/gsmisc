@@ -51,23 +51,3 @@ NULL
 #' @export
 "%|null|%" <- Partial(`%||%`, filter = "is.null")
 
-
-## Chain functions
-#' @export
-"%@%" <- function(x, f) {
-  eval.parent(as.call(append(as.list(substitute(f)), list(x), 1)))
-}
-
-
-
-
-
-## http://stackoverflow.com/questions/7519790/assign-multiple-new-variables-in-a-single-line-in-r
-#' @export
-vassign <- function(..., values, envir=parent.frame()) {
-  vars <- as.character(substitute(...()))
-  values <- rep(values, length.out=length(vars))
-  for(var in vars) {
-    assign(var, values[[i]], envir)
-  }
-}

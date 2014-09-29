@@ -1,10 +1,16 @@
 #' @include assertions.R
 NULL
 
-#' Filter \code{NULL} entries from a list.
+#' Filter "empty" elements from a list.
 #' 
-#' @param x A list.
+#' \code{compact} filters \code{NULL} elments from a list; \code{compactChar} filters
+#' empty strings (\code{""}) from a list (or vector); \code{compactNA} filters
+#' \code{NA}s and  \code{compactAll} filters all of the above.
+#' 
+#' @param x A vector or list.
+#' @return A vector or list with empty elements filtered out.
 #' @export
+#' @rdname compact
 #' @examples
 #' l <- list(a=1, b=NULL, c=NA)
 #' compact(l)
@@ -13,33 +19,30 @@ NULL
 #' ## 
 #' ## $c
 #' ## [1] NA
+#' compactNA(l)
+#' ## $a
+#' ## [1] 1
+#' ## 
+#' ## $b
+#' ## NULL
 compact <- function(x) {
   x[!vapply(x, is.null, FALSE, USE.NAMES=FALSE)]
 }
 
-
-#' Filter empty string entries from a list.
-#' 
-#' @param x A vector.
+#' @rdname compact
 #' @export
 compactChar <- function(x) {
   x[vapply(x, nzchar, FALSE, USE.NAMES=FALSE)]
 }
 
-
-#' Filter NA entries from a list.
-#' 
-#' @param x A vector.
+#' @rdname compact
 #' @export
 compactNA <- function(x) {
   filterNA <- function(x) suppressWarnings(is.na(x)) %||% FALSE
   x[!vapply(x, filterNA, FALSE, USE.NAMES=FALSE)]
 }
 
-
-#' Filter empty entries from a list.
-#' 
-#' @param x A vector.
+#' @rdname compact
 #' @export
 compactAll <- function(x) {
   x[!vapply(x, are_empty, FALSE, USE.NAMES=FALSE)]
