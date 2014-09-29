@@ -30,6 +30,7 @@ plotInheritance <- function (classes, subclasses = FALSE, ...) {
 #' @param n Max number of results returned.
 #' @return Prints the URLs returned by Google Search to screen and invisibly
 #' returns a character vector of the URLs. 
+#' @export
 #' @examples
 #' r <- google("use google from command line")
 #' \dontrun{
@@ -47,4 +48,23 @@ google <- function(query = "", n = 10) {
   print(stream)
   return(invisible(stream))
 }
+
+#' Show head and tail of a data structure.
+#' 
+#' Prints head and tail of avector, list, matrix, or data.frame.
+#' 
+#' @param x An object.
+#' @param n How many elements to print.
+#' @return Only called for its side effect.
+#' @seealso \code{\link{head}}, \code{link{tail}}.
+#' @export
+ht <- function(x, n = 6) {
+  print(head(x, n = n))
+  cat(' .\n .\n .\n')
+  print(tail(x, n = n))
+  invisible()
+}
+
+
+
 
