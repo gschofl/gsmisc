@@ -18,13 +18,17 @@ Imports:
     RCurl,
     RSQLite,
     XML,
-    xtable
+    xtable,
+    gsmisc,
+    foreach,
+    iterators
 Suggests:
     BiocInstaller,
     data.table,
     lubridate,
     ProjectTemplate,
-    packrat
+    packrat,
+    knitr
 Collate:
     'compact.R'
     'functional.R'
@@ -46,3 +50,4 @@ Collate:
     'tanken.R'
     'utils.R'
     'xml-utils.R'
+VignetteBuilder: knitr

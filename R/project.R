@@ -1,6 +1,16 @@
 #' @include functional.R
 NULL
 
+#' @keywords internal
+open_rstudio_project <- function(rproj) {
+  rstudio <- Sys.which("rstudio")
+  if (rstudio == "") {
+    stop("RStudio is not installed in PATH", call. = TRUE)
+  }
+  action <- paste(rstudio, rproj)
+  system(action, wait = FALSE, ignore.stderr = TRUE)
+}
+
 #' Open an RStudio project from R
 #' 
 #' Quickly open a package (ar any  directory in the search path) as an RStudio
@@ -16,17 +26,7 @@ NULL
 #' @seealso Inspired by \href{http://stackoverflow.com/questions/18426726/system-open-rstudio-close-connection}{this} question on stackoverflow
 #' @export  
 rproj <- function(pkg, path = 'all') {
-  open_project <- function(rproj) {
-    rstudio <- Sys.which("rstudio")
-    if (rstudio == "") {
-      stop("RStudio is not installed in PATH", call.=TRUE)
-    }
-    action <- paste(rstudio, rproj)
-    system(action, wait=FALSE, ignore.stderr=TRUE)
-  }
-  "%||%" <- function (a, b) {
-    if (is.null(a)) b else a
-  }
+  
   Rproj.template <- c("Version: 1.0", "", "RestoreWorkspace: Default",
                       "SaveWorkspace: Default",  "AlwaysSaveHistory: Default",
                       "", "EnableCodeIndexing: Yes",  "UseSpacesForTab: Yes",
@@ -40,9 +40,9 @@ rproj <- function(pkg, path = 'all') {
   } else {
     stop("'pkg' must be a symbol or a string")
   }
-  devel.path <- getOption('gsmisc.devel') %||% '.'
-  proj.path  <- getOption('gsmisc.proj') %||% '.'
-  pkgs.path  <- getOption('gsmisc.pkgs') %||% '.'
+  devel.path <- getOption('gsmisc.devel') %|null|% '.'
+  proj.path  <- getOption('gsmisc.proj') %|null|% '.'
+  pkgs.path  <- getOption('gsmisc.pkgs') %|null|% '.'
   path <- switch(path,
                  all = normalizePath(unique(c(devel.path, proj.path, pkgs.path))),
                  devel = normalizePath(devel.path),
@@ -70,7 +70,7 @@ rproj <- function(pkg, path = 'all') {
     cat(paste(Rproj.template, collapse = "\n"), file = rproj_loc)  
   }
   
-  open_project(rproj_loc)
+  open_rstudio_project(rproj_loc)
 }
 
 
@@ -176,3 +176,48 @@ createProject <- function(project = 'myProject',
     }
   )
 }
+
+#' Create a new package
+#' 
+#' \code{createPackage} is a simple wrapper around \code{\link[devtools]{create}}.
+#' 
+#' @param name Name of the package.
+#' @param path Location of the package.
+#' @param use_test Add testing infrastructure to the package.
+#' @param use_doc Add a roxygen template for package documentation.
+#' @param use_rcpp Add infrastructure for using \code{Rcpp}.
+#' @param use_travis Add a basic travis template.
+#' @param use_vignette Add a vignette template to the project.
+#' @return Called for its side effects. Opens a new instance of Rstudio in
+#'   the newly created package directory.
+#' @export
+#' @examples
+#' \dontrun{
+#'    createPackage("utils", use_rcpp = TRUE)  
+#' }
+#' 
+createPackage <- function(name = "dkms.utils", path = getOption("gsmisc.devel"),
+                          use_test = TRUE, use_doc = TRUE,use_rcpp = FALSE,
+                          use_travis = FALSE, use_vignette = FALSE) {
+  pkg <- normalizePath(file.path(path, name), mustWork = FALSE)
+  devtools::create(pkg, rstudio = TRUE)
+  if (use_test) {
+    devtools::use_testthat(pkg)
+  }
+  if (use_rcpp) {
+    devtools::use_rcpp(pkg)
+  }
+  if (use_travis) {
+    devtools::use_travis(pkg)
+  }
+  if (use_doc) {
+    devtools::use_package_doc(pkg)
+  }
+  if (use_vignette) {
+    devtools::use_vignette(name, pkg)
+  }
+  rproj <- file.path(pkg, paste0(name, '.Rproj'))
+  open_rstudio_project(rproj)
+}
+
+

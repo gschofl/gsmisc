@@ -4,9 +4,10 @@
 scratch.[rR]
 cache/
 data/
-doc/
+inst/doc
 playground/
 *.html
 *.so
 *.o
+
 
