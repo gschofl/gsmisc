@@ -3,7 +3,6 @@
 #' @importFrom RSQLite dbGetInfo
 NULL
 
-
 #' Is an object of length one?
 #'
 #' Which elements in a list are of length one?
@@ -23,7 +22,6 @@ on_failure(is.scalar) <- function(call, env) {
   paste0(deparse(call$x), " does not have length one.")
 }
 
-
 #' @rdname is.scalar
 #' @export
 #' @examples
@@ -31,9 +29,8 @@ on_failure(is.scalar) <- function(call, env) {
 #' are_scalar(c(1,2,3))
 are_scalar <- function(x) {
   assert_that(!is.null(x))
-  vapply(x, is.scalar, FUN.VALUE=logical(1), USE.NAMES=FALSE)
+  vapply(x, is.scalar, FALSE, USE.NAMES = FALSE)
 }
-
 
 #' @rdname is.scalar
 #' @export
@@ -43,7 +40,6 @@ all_scalar <- function(x) all(are_scalar(x))
 on_failure(all_scalar) <- function(call, env) {
   paste0("Not all elements in ", deparse(call$x), " are of length one.")
 }
-
 
 #' Is an object empty?
 #'
@@ -66,20 +62,17 @@ on_failure(is.empty) <- function(call, env) {
   paste0(deparse(call$x), " is not empty.")
 }
 
-
 #' @rdname is.empty
 #' @export
 #' @examples
 #' are_empty(list(1,NULL,3,NA))
 are_empty <- function(x) {
   if (is.recursive(x) || length(x) > 1) {
-    vapply(x, function(x) is.null(x) || length(x) == 0L,
-           FUN.VALUE=logical(1), USE.NAMES=FALSE) | !nzchar(x)
+    vapply(x, function(x) is.null(x) || length(x) == 0L, FALSE, USE.NAMES = FALSE) | !nzchar(x)
   } else {
     is.empty(x)
   }
 }
-
 
 #' @rdname is.empty
 #' @export
@@ -90,7 +83,6 @@ all_empty <- function(x) all(are_empty(x))
 on_failure(all_empty) <- function(call, env) {
   paste0("Not all elements in ", deparse(call$x), " are empty.")
 }
-
 
 #' Test if an external executable is available
 #' 
@@ -110,7 +102,6 @@ on_failure(has_command) <- function(call, env) {
          eval(call$msg, env))
 }
 
-
 #' Which elements in a list are NULL?
 #'
 #' @param x object to test
@@ -120,9 +111,8 @@ on_failure(has_command) <- function(call, env) {
 #' are_null(list(1,NULL,3))
 are_null <- function(x) {
   assert_that(is.list(x))
-  vapply(x, is.null, FUN.VALUE=logical(1), USE.NAMES=FALSE)
+  vapply(x, is.null, FALSE, USE.NAMES = FALSE)
 }
-
 
 #' Which elements in a list are TRUE?
 #'
@@ -132,9 +122,8 @@ are_null <- function(x) {
 #' are_true(list(FALSE,TRUE,TRUE))
 are_true <- function(x) {
   assert_that(is.list(x))
-  vapply(x, isTRUE, FUN.VALUE=logical(1), USE.NAMES=FALSE)
+  vapply(x, isTRUE, FALSE, USE.NAMES = FALSE)
 }
-
 
 #' Which elements in a list are FALSE?
 #'
@@ -144,9 +133,8 @@ are_true <- function(x) {
 #' are_false(list(FALSE,TRUE,TRUE))
 are_false <- function(x) {
   assert_that(is.list(x))
-  vapply(x, function(x) identical(x, FALSE), FUN.VALUE=logical(1), USE.NAMES=FALSE)
+  vapply(x, function(x) identical(x, FALSE), FALSE, USE.NAMES = FALSE)
 }
-
 
 #' Is an R Packages installed?
 #'
@@ -156,26 +144,8 @@ are_false <- function(x) {
 #' is.installed("methods")
 is.installed <- function(pkg) {
   assert_that(is.string(pkg))
-  is.element(pkg, .packages(all.available=TRUE))
+  is.element(pkg, .packages(all.available = TRUE))
 }
 on_failure(is.installed) <- function(call, env) {
   paste0("Package ", deparse(call$pkg), " is not installed.")
 }
-
-
-#' Reverse Value Matching
-#' 
-#' Negation of the \code{\link{\%in\%}} operator.
-#' 
-#' @usage x \%ni\% y
-#' @param x The values to be matched.
-#' @param y The values to \emph{not} be matched against.
-#' @return A logical vector.
-#' @rdname ni
-#' @export
-#' @examples
-#' 1:5 %ni% c(3,4,5)
-#' @keywords utilities
-"%ni%" <- Negate(`%in%`)
-
-

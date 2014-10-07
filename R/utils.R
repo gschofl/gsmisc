@@ -9,7 +9,6 @@ merge_list <- function (x, y, ...) {
   x
 }
 
-
 #' @export
 merge_dups <- function (x) {
   if (all_empty(x))
@@ -19,7 +18,6 @@ merge_dups <- function (x) {
   b <- x[duplicated(x_names)]
   modify_list(a, b, "merge")
 }
-
 
 ## pinched from the lattice package.
 #' @export
@@ -40,7 +38,6 @@ modify_list <- function (a, b, mode=c("replace",  "merge")) {
   a
 }
 
-
 #' Number of unique elements in a vector.
 #' 
 #' A wrapper around \code{length(unique(x))}
@@ -55,29 +52,6 @@ nunique <- function(x, ...) {
     length(unique(x, ...))
   }
 }
-
-#' Purge rows containing NAs from a data frame
-#' 
-#' returns the supplied colums without rows containing NAs as a data frames
-#' 
-#' @param df data frame
-#' @param cols column names
-#' 
-#' @return data frame
-#' 
-#' @export
-purgeNA <- function (df, cols) {
-  if (length(cols) <= 1) {
-    stop("Brauche mindestens zwei Spaltennamen um einen Datenrahmen zu bauen")
-  }
-  if(!all(cols %in% names(df))) {
-    stop("Einen oder mehrere der Spaltennamen gibt es nicht im Datenrahmen")
-  }
-  df <- df[, names(df) %in% cols]
-  df <- df[!Reduce("|", lapply(df, is.na)), ]
-  return(df)
-}
-
 
 #' Execute code in an temporarily different environment.
 #'
@@ -100,7 +74,7 @@ NULL
 #' @export
 with_cpp11 <- function(code) {
   old <- Sys.getenv("PKG_CXXFLAGS", names=TRUE)
-  Sys.setenv("PKG_CXXFLAGS"="-std=c++11")
+  Sys.setenv("PKG_CXXFLAGS" = "-std=c++11")
   on.exit(do.call("Sys.setenv", as.list(old)))
   force(code)
 }

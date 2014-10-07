@@ -51,3 +51,26 @@ NULL
 #' @export
 "%|null|%" <- Partial(`%||%`, filter = "is.null")
 
+#' Reverse Value Matching
+#' 
+#' Negation of the \code{\link{\%in\%}} operator.
+#' 
+#' @usage x \%ni\% y
+#' @param x The values to be matched.
+#' @param y The values to \emph{not} be matched against.
+#' @return A logical vector.
+#' @rdname ni
+#' @export
+#' @examples
+#' 1:5 %ni% c(3,4,5)
+#' @keywords utilities
+"%ni%" <- Negate(`%in%`)
+
+#' A simple pattern matching operator.
+#' 
+#' @param x A character vector.
+#' @param pattern A regular expression.
+#' @return Matching elements in \code{target}
+#' @export
+"%~%" <- function(x, pattern) grep(pattern, x, value = TRUE)
+

@@ -34,8 +34,8 @@ SysCall <- function(exec, ..., args = list(), stdin = NULL, stdout = NULL,
   args[are_true(args)] <- ""
   args[are_false(args) | are_null(args)] <- NULL
   args <- switch(style,
-                 unix=paste0(trim(sprintf("-%s%s%s", names(args), sep, args)), collapse=" "),
-                 gnu=paste0(trim(sprintf("--%s%s%s", names(args), sep, args)), collapse=" "))
+                 unix = paste0(trim(sprintf("-%s%s%s", names(args), sep, args)), collapse = " "),
+                 gnu  = paste0(trim(sprintf("--%s%s%s", names(args), sep, args)), collapse = " "))
   
   if (show_cmd) {
     print(trim(paste(exec, args, stdin, stdout)))

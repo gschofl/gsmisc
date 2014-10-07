@@ -26,24 +26,24 @@ NULL
 #' ## $b
 #' ## NULL
 compact <- function(x) {
-  x[!vapply(x, is.null, FALSE, USE.NAMES=FALSE)]
+  x[!vapply(x, is.null, FALSE, USE.NAMES = FALSE)]
 }
 
 #' @rdname compact
 #' @export
 compactChar <- function(x) {
-  x[vapply(x, nzchar, FALSE, USE.NAMES=FALSE)]
+  x[vapply(x, nzchar, FALSE, USE.NAMES = FALSE)]
 }
 
 #' @rdname compact
 #' @export
 compactNA <- function(x) {
   filterNA <- function(x) suppressWarnings(is.na(x)) %||% FALSE
-  x[!vapply(x, filterNA, FALSE, USE.NAMES=FALSE)]
+  x[!vapply(x, filterNA, FALSE, USE.NAMES = FALSE)]
 }
 
 #' @rdname compact
 #' @export
 compactAll <- function(x) {
-  x[!vapply(x, are_empty, FALSE, USE.NAMES=FALSE)]
+  x[!vapply(x, are_empty, FALSE, USE.NAMES = FALSE)]
 }

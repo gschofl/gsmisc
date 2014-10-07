@@ -9,7 +9,6 @@ xvalue <- function(doc, path, alt = NA_character_, as = 'character',
   set_mode(v, as)
 }
 
-
 #' @export
 xname <- function(doc, path, alt = NA_character_, as = 'character',
                   fun = NULL, ...) {
@@ -17,7 +16,6 @@ xname <- function(doc, path, alt = NA_character_, as = 'character',
   n <- unlist(xpathApply(doc, path, fun, ...)) %||% alt
   set_mode(n, as)
 }
-
 
 #' @export
 xattr <- function(doc, path, name, alt = NA_character_, as = 'character',
@@ -27,22 +25,17 @@ xattr <- function(doc, path, name, alt = NA_character_, as = 'character',
   set_mode(a, as)
 }
 
-
 #' @export
 xsize <- function(doc, path, ...) {
   length(xpathApply(doc, path, ...))
 }
-
 
 #' @export
 xset <- function(doc, path, ...) {
   xpathApply(doc, path, fun = NULL, ...)
 }
 
-
 set_mode <- function(x, as) {
   AS <- match.fun(paste0('as.', as))
   if (!is.null(x)) AS(x) else x
 }
-
-

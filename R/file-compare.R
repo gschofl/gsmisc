@@ -2,7 +2,6 @@
 #' @importFrom assertthat is.readable
 NULL
 
-
 #' Compare local and remote file timestamp and/or size
 #' 
 #' @param file Path to local file.

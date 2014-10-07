@@ -26,7 +26,6 @@ Partial <- function(fn, ..., .env = parent.frame()) {
   eval(call("function", as.pairlist(args), fcall), .env)
 }
 
-
 #' Compose functions
 #'
 #' Returns a function that applies the last argument to its input, than
@@ -74,7 +73,6 @@ Sequence <- function(...) {
     res
   }
 }
-
 
 #' Fast Map
 #' 
@@ -169,7 +167,6 @@ Dot_every <- function(n, fn) {
   }
 }
 
-
 #' Log a time stamp and a message to file everytime a function is run
 #' 
 #' @param path path to log file
@@ -193,7 +190,6 @@ Log_to <- function(path, message="", fn) {
   }
 }
 
-
 #' Call a function with arguments provided individually
 #' 
 #' @param fn The function to call.
@@ -210,7 +206,6 @@ Call <- function(fn, ...) {
   fn <- match.fun(fn)
   fn(...)
 }
-
 
 #' Predicates
 #' 
@@ -235,7 +230,6 @@ And <- function(...) {
   }
 }
 
-
 #' @param \dots Predicate functions
 #' @rdname Predicates
 #' @export
@@ -249,5 +243,3 @@ Or <- function(...) {
     value
   }
 }
-
-

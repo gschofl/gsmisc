@@ -30,7 +30,6 @@ trim <- function (x, trim = '\\s+') {
   gsub(paste0("^", trim, "|", trim, "$"), '', x)
 }
 
-
 #' Duplicate a character string n times
 #' 
 #' @param x Input character string
@@ -46,7 +45,6 @@ dup <- function (x, n) {
   vapply(.mapply(rep.int, list(rep.int(x, length(n)), n), NULL), paste0, collapse="", "")
 }
 
-
 #' Create blank strings with a given number of characters
 #' 
 #' @usage blanks(n)
@@ -56,7 +54,6 @@ dup <- function (x, n) {
 #' @examples
 #'  blanks(10)
 blanks <- Partial(dup, x = " ")
-
 
 #' Pad a string
 #' 
@@ -77,7 +74,6 @@ pad <- function (x, n = 10, where = 'left', pad = ' ') {
   padding <- dup(pad, lengths)
   paste0(padding[match(left, lengths)], x, padding[match(right, lengths)])
 }
-
 
 #' Split up a string in pieces and return the nth piece.
 #' 
@@ -122,7 +118,6 @@ strsplitN <- function (x, split, n, from = "start", collapse = split, ...) {
   unlist(.mapply(function(x, n) paste0(x[n], collapse = collapse), list(x = xs, n = n), NULL))
 }
 
-
 #' Split a file path and return the nth piece(s)
 #'
 #' @param path Vector of file paths.
@@ -134,9 +129,8 @@ strsplitN <- function (x, split, n, from = "start", collapse = split, ...) {
 #' @export
 split_path <- function (path, n = 1, from = "end", ...) {
   from <- match.arg(from, c("start", "end"))
-  strsplitN(x=path, split=.Platform$file.sep, n=n, from=from, ...)
+  strsplitN(x = path, split = .Platform$file.sep, n = n, from = from, ...)
 }
-
 
 #' Strip file extensions
 #'
@@ -149,7 +143,7 @@ split_path <- function (path, n = 1, from = "end", ...) {
 #' and so on.
 #' 
 #' @export
-strip_ext <- stripExt <- function (file, sep="\\.", level=0) {
+strip_ext <- function (file, sep = "\\.", level = 0) {
   assert_that(!missing(file), is.character(file))
   if (level == 0L) {
     # level 0 ditches everything that comes after a dot
@@ -170,24 +164,21 @@ strip_ext <- stripExt <- function (file, sep="\\.", level=0) {
   }
 }
 
-
 #' Replace file extensions
 #' 
 #' @inheritParams strip_ext
 #' @param replacement replacement extension
 #'
 #' @export
-replace_ext <- replaceExt <- function(file, replacement="", sep="\\.", level=0) {
-  if (nchar(replacement) == 0L)
-    sep=""
+replace_ext <- function(file, replacement = "", sep = "\\.", level = 0) {
+  sep <- if (nchar(replacement) == 0L) "" else sep
   # strip a leading "." from replacement
   if (grepl("^\\.", replacement)) {
     replacement <- usplit(replacement, split="^\\.")[2L]
   }
-  paste(strip_ext(file=file, sep=sep, level=level), replacement,
+  paste(strip_ext(file = file, sep = sep, level = level), replacement,
         sep=gsub("\\", "", sep, fixed=TRUE))  
 }
-
 
 #' Check if a pattern occurs in a character vector
 #' 
@@ -201,10 +192,9 @@ exists_re <- function(x, re, ...) {
   if (length(x) == 1) {
     grepl(re, x, ...)
   } else {
-    vapply(x, grepl, pattern = re, ..., FUN.VALUE=logical(1), USE.NAMES=FALSE)
+    vapply(x, grepl, pattern = re, ..., FUN.VALUE = FALSE, USE.NAMES = FALSE)
   }
 }
-
 
 #' Count how often a pattern occurs in a character vector.
 #' 
@@ -218,7 +208,6 @@ count_re <- function(x, re, ...) {
   vapply(gregexpr(re, x, ...), function(x) sum(x > 0L), 0, USE.NAMES=FALSE)
 }
 
-
 #' unlist(strsplit(x, split, ...))
 #' 
 #' @usage usplit(x, split, ...)
@@ -230,5 +219,3 @@ count_re <- function(x, re, ...) {
 #' usplit("a.b.c", ".", fixed = TRUE)
 ## ## [1] "a" "b" "c"
 usplit <- Compose("unlist", "strsplit")
-
-
