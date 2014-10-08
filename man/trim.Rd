@@ -18,6 +18,13 @@ Trim elements
 }
 \examples{
 x <- " abc\\n\\t"
- trim(x)
+trim(x)
+}
+\seealso{
+Other string-utils: \code{\link{blanks}};
+  \code{\link{dup}}; \code{\link{pad}};
+  \code{\link{replace_ext}}; \code{\link{split_path}};
+  \code{\link{strip_ext}}; \code{\link{strsplitN}};
+  \code{\link{wrap}}
 }
 

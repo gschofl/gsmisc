@@ -19,7 +19,6 @@ Imports:
     RSQLite,
     XML,
     xtable,
-    gsmisc,
     foreach,
     iterators
 Suggests:
@@ -30,11 +29,12 @@ Suggests:
     packrat,
     knitr
 Collate:
-    'compact.R'
-    'functional.R'
-    'ops.R'
-    'assertions.R'
     'cache.R'
+    'functional.R'
+    'operators.R'
+    'tests.R'
+    'compact.R'
+    'utils.R'
     'file-compare.R'
     'flatten.R'
     'install.R'
@@ -43,11 +43,11 @@ Collate:
     'misc.R'
     'multiplot.R'
     'project.R'
+    'regexp-utils.R'
     'sqlite-utils.R'
     'string-utils.R'
     'strmatch.R'
     'system.R'
     'tanken.R'
-    'utils.R'
     'xml-utils.R'
 VignetteBuilder: knitr

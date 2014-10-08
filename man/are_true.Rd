@@ -6,12 +6,22 @@
 are_true(x)
 }
 \arguments{
-\item{x}{object to test}
+\item{x}{An object to test.}
+
+\item{A}{logical vector.}
 }
 \description{
 Which elements in a list are TRUE?
 }
 \examples{
-are_true(list(FALSE,TRUE,TRUE))
+are_true(list(FALSE, TRUE, TRUE))
+}
+\seealso{
+Other Tests: \code{\link{all_empty}},
+  \code{\link{are_empty}}, \code{\link{is.empty}};
+  \code{\link{all_scalar}}, \code{\link{are_scalar}},
+  \code{\link{is.scalar}}, \code{\link{is.string}};
+  \code{\link{are_false}}; \code{\link{are_null}};
+  \code{\link{has_command}}; \code{\link{is.installed}}
 }
 

@@ -10,4 +10,8 @@ Prompts for which of the following packages you want to install:
 \code{rmisc}, \code{Rentrez}, \code{biofiles}, \code{blastr},
 \code{ncbi}.
 }
+\seealso{
+Other Installers: \code{\link{install_packages}},
+  \code{\link{update_packages}}
+}
 

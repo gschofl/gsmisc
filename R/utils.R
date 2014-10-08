@@ -53,6 +53,18 @@ nunique <- function(x, ...) {
   }
 }
 
+#' unlist(strsplit(x, split, ...))
+#' 
+#' @usage usplit(x, split, ...)
+#' @param x Character vector to be split.
+#' @param split The regexp to split on.
+#' @param \dots Arguments passed on to \code{\link{strsplit}}.
+#' @export
+#' @examples
+#' usplit("a.b.c", ".", fixed = TRUE)
+## ## [1] "a" "b" "c"
+usplit <- unlist %.% strsplit
+
 #' Execute code in an temporarily different environment.
 #'
 #' \itemize{
@@ -79,7 +91,6 @@ with_cpp11 <- function(code) {
   force(code)
 }
 
-
 #' @rdname with
 #' @export
 with_localtime <- function(new, code) {
@@ -88,4 +99,3 @@ with_localtime <- function(new, code) {
   on.exit(Sys.setlocale("LC_TIME", old))
   force(code)
 }
-

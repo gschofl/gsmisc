@@ -3,6 +3,7 @@
 \alias{all_scalar}
 \alias{are_scalar}
 \alias{is.scalar}
+\alias{is.string}
 \title{Is an object of length one?}
 \usage{
 is.scalar(x)
@@ -10,9 +11,11 @@ is.scalar(x)
 are_scalar(x)
 
 all_scalar(x)
+
+is.string(x)
 }
 \arguments{
-\item{x}{object to test}
+\item{x}{An object to test.}
 }
 \description{
 Which elements in a list are of length one?
@@ -21,13 +24,15 @@ Are all elements in a list of length one?
 \examples{
 is.scalar(1)
 is.scalar(NULL)
-are_scalar(list(1,2,3))
-are_scalar(c(1,2,3))
+are_scalar(list(1, 2, 3))
+are_scalar(c(1, 2, 3))
 all_scalar(list("a", "b", c("c", "d")))
 }
 \seealso{
-Other tests: \code{\link{all_empty}},
+Other Tests: \code{\link{all_empty}},
   \code{\link{are_empty}}, \code{\link{is.empty}};
-  \code{\link{has_command}}
+  \code{\link{are_false}}; \code{\link{are_null}};
+  \code{\link{are_true}}; \code{\link{has_command}};
+  \code{\link{is.installed}}
 }
 

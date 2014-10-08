@@ -3,21 +3,34 @@
 \alias{Partial}
 \title{Partial function application.}
 \usage{
-Partial(fn, ..., .env = parent.frame())
+Partial(.f, ..., .env = parent.frame(), .lazy = TRUE)
 }
 \arguments{
-\item{fn}{Function to apply partially.}
+\item{...}{Named arguments that should be applied to \code{.fn}}
 
 \item{.env}{the environment of the created function. Defaults to
 \code{\link{parent.frame}}.}
 
-\item{\dots}{Named arguments that should be applied to \code{fn}}
+\item{.lazy}{If \code{TRUE} arguments are evaluated lazily.}
+
+\item{.fn}{Function to apply partially.}
+}
+\value{
+A function.
 }
 \description{
 Modify a function by pre-applying some of the arguments.
 }
 \examples{
 mean1 <- Partial(mean, na.rm = TRUE)
-mean1(c(1,2,3,NA,4))
+mean1(c(1, 2, 3, NA, 4))
+}
+\seealso{
+Other Functionals: \code{\link{And}}, \code{\link{Or}};
+  \code{\link{Call}}; \code{\link{Compose}},
+  \code{\link{Sequence}}, \code{\link{\%.\%}};
+  \code{\link{Delay_by}}; \code{\link{Dot_every}};
+  \code{\link{FMap}}; \code{\link{Fail_with}};
+  \code{\link{Log_to}}; \code{\link{Maybe}}
 }
 

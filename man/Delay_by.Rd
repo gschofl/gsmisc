@@ -13,4 +13,12 @@ Delay_by(delay, fn)
 \description{
 Delay function call
 }
+\seealso{
+Other Functionals: \code{\link{And}}, \code{\link{Or}};
+  \code{\link{Call}}; \code{\link{Compose}},
+  \code{\link{Sequence}}, \code{\link{\%.\%}};
+  \code{\link{Dot_every}}; \code{\link{FMap}};
+  \code{\link{Fail_with}}; \code{\link{Log_to}};
+  \code{\link{Maybe}}; \code{\link{Partial}}
+}
 

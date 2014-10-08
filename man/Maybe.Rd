@@ -15,4 +15,12 @@ A function.
 If the argument(s) to a function are missing or \code{NULL},
 return \code{NULL}; otherwise apply the function.
 }
+\seealso{
+Other Functionals: \code{\link{And}}, \code{\link{Or}};
+  \code{\link{Call}}; \code{\link{Compose}},
+  \code{\link{Sequence}}, \code{\link{\%.\%}};
+  \code{\link{Delay_by}}; \code{\link{Dot_every}};
+  \code{\link{FMap}}; \code{\link{Fail_with}};
+  \code{\link{Log_to}}; \code{\link{Partial}}
+}
 

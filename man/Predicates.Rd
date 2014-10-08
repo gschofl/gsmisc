@@ -9,9 +9,9 @@ And(...)
 Or(...)
 }
 \arguments{
-\item{\dots}{Predicate functions}
+\item{...}{Predicate functions}
 
-\item{\dots}{Predicate functions}
+\item{...}{Predicate functions}
 }
 \description{
 Predicates
@@ -22,5 +22,13 @@ applied to the returned function's arguments, returns \code{TRUE}.
 
 \code{Or} returns a function that returns \code{TRUE} when any the arguments,
 applied to the returned function's arguments, returns \code{TRUE}.
+}
+\seealso{
+Other Functionals: \code{\link{Call}};
+  \code{\link{Compose}}, \code{\link{Sequence}},
+  \code{\link{\%.\%}}; \code{\link{Delay_by}};
+  \code{\link{Dot_every}}; \code{\link{FMap}};
+  \code{\link{Fail_with}}; \code{\link{Log_to}};
+  \code{\link{Maybe}}; \code{\link{Partial}}
 }
 

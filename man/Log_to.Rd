@@ -15,4 +15,12 @@ Log_to(path, message = "", fn)
 \description{
 Log a time stamp and a message to file everytime a function is run
 }
+\seealso{
+Other Functionals: \code{\link{And}}, \code{\link{Or}};
+  \code{\link{Call}}; \code{\link{Compose}},
+  \code{\link{Sequence}}, \code{\link{\%.\%}};
+  \code{\link{Delay_by}}; \code{\link{Dot_every}};
+  \code{\link{FMap}}; \code{\link{Fail_with}};
+  \code{\link{Maybe}}; \code{\link{Partial}}
+}
 

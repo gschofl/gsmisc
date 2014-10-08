@@ -3,7 +3,7 @@
 \alias{\%~\%}
 \title{A simple pattern matching operator.}
 \usage{
-x \%~\% pattern
+x \%~\% re
 }
 \arguments{
 \item{x}{A character vector.}

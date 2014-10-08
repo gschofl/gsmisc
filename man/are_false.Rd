@@ -6,12 +6,23 @@
 are_false(x)
 }
 \arguments{
-\item{x}{object to test}
+\item{x}{An object to test.}
+}
+\value{
+A logical vector.
 }
 \description{
 Which elements in a list are FALSE?
 }
 \examples{
 are_false(list(FALSE,TRUE,TRUE))
+}
+\seealso{
+Other Tests: \code{\link{all_empty}},
+  \code{\link{are_empty}}, \code{\link{is.empty}};
+  \code{\link{all_scalar}}, \code{\link{are_scalar}},
+  \code{\link{is.scalar}}, \code{\link{is.string}};
+  \code{\link{are_null}}; \code{\link{are_true}};
+  \code{\link{has_command}}; \code{\link{is.installed}}
 }
 

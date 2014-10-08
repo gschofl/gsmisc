@@ -1,3 +1,4 @@
+#' @include utils.R
 #' @importFrom RCurl basicTextGatherer curlPerform
 #' @importFrom assertthat is.readable
 NULL

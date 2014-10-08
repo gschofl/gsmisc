@@ -8,10 +8,21 @@ is.installed(pkg)
 \arguments{
 \item{pkg}{Package name as character string.}
 }
+\value{
+A logical.
+}
 \description{
 Is an R Packages installed?
 }
 \examples{
 is.installed("methods")
+}
+\seealso{
+Other Tests: \code{\link{all_empty}},
+  \code{\link{are_empty}}, \code{\link{is.empty}};
+  \code{\link{all_scalar}}, \code{\link{are_scalar}},
+  \code{\link{is.scalar}}, \code{\link{is.string}};
+  \code{\link{are_false}}; \code{\link{are_null}};
+  \code{\link{are_true}}; \code{\link{has_command}}
 }
 

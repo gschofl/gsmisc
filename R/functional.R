@@ -4,38 +4,35 @@ NULL
 # Much of the code in here is taken from Hadley Wickham's
 # "Advanced R Programming" (http://adv-r.had.co.nz/)
 
-#' Partial function application.
+#' Call a function with arguments provided individually.
 #' 
-#' Modify a function by pre-applying some of the arguments.
-#'   
-#' @param fn Function to apply partially.
-#' @param \dots Named arguments that should be applied to \code{fn}
-#' @param .env the environment of the created function. Defaults to
-#'   \code{\link{parent.frame}}.
+#' @param fn The function to call.
+#' @param \dots Arguments to function \code{fn}.
+#' @return The return value of the function call.
+#' @family Functionals
 #' @export
 #' @examples
-#' mean1 <- Partial(mean, na.rm = TRUE)
-#' mean1(c(1,2,3,NA,4))
-Partial <- function(fn, ..., .env = parent.frame()) {
-  assert_that(is.function(fn))
-  fcall <- substitute(fn(...))
-  if (!is.primitive(fn))
-    fcall <- match.call(fn, fcall)  
-  fcall[[length(fcall) + 1]] <- quote(...)
-  args <- list("..." = quote(expr = ))
-  eval(call("function", as.pairlist(args), fcall), .env)
+#' funs <- list("mean", "sd", "var")
+#' sapply(funs, Call, 1:100)
+#'
+#' ## invoke an anonymous function
+#' Call(function(a, b) a*b, 3, 4)
+Call <- function(fn, ...) {
+  fn <- match.fun(fn)
+  fn(...)
 }
 
-#' Compose functions
+#' Compose multiple functions.
 #'
 #' Returns a function that applies the last argument to its input, than
 #' the penultimate argument and so on.
 #'
-#' @param \dots The functions to be composed.
-#' @param g,f Two functions to compose (infix notaion)
+#' @param ... The functions to be composed.
+#' @param f,g Two functions to compose (infix notation).
+#' @family Functionals
 #' @export
 #' @examples
-#'  x <- c(1,1,2,2,3,3)
+#'  x <- c(1, 1, 2, 2, 3, 3)
 #'  nunique <- Compose(length, unique)
 #'  nunique(x) == length(unique(x))
 #'  
@@ -44,20 +41,23 @@ Partial <- function(fn, ..., .env = parent.frame()) {
 Compose <- function(...) {
   fns <- lapply(compact(list(...)), match.fun)
   len <- length(fns)
+  head <- fns[[len]]
+  tail <- fns[-len]
   function(...) {
-    res <- Call(fns[[len]], ...)
-    for (fn in rev(fns[-len]))
-      res <- fn(res)
-    res
+    rs <- head(...)
+    for (fn in rev(tail)) {
+      rs <- fn(rs)
+    }
+    rs
   }
 }
 
 #' @rdname Compose
 #' @export
-"%.%" <- function(g, f) {
-  g <- match.fun(g)
+"%.%" <- function(f, g) {
   f <- match.fun(f)
-  function(...) g(f(...))
+  g <- match.fun(g)
+  function(...) f(g(...))
 }
 
 #' @details \code{Sequence} is the same as \code{Compose}, except that it
@@ -65,24 +65,55 @@ Compose <- function(...) {
 #' @rdname Compose
 #' @export
 Sequence <- function(...) {
-  fns <- lapply(list(...), match.fun)
+  fns <- lapply(compact(list(...)), match.fun)
+  head <- fns[[1L]]
+  tail <- fns[-1L]
   function(...) {
-    res <- Call(fns[[1]], ...)
-    for(fn in fns[-1])
-      res <- fn(res)
-    res
+    rs <- head(...)
+    for (fn in tail) {
+      rs <- fn(rs)
+    }
+    rs
   }
 }
 
-#' Fast Map
+#' Partial function application.
+#'
+#' Modify a function by pre-applying some of the arguments.
+#'
+#' @param .fn Function to apply partially.
+#' @param ... Named arguments that should be applied to \code{.fn}
+#' @param .env the environment of the created function. Defaults to
+#'   \code{\link{parent.frame}}.
+#' @param .lazy If \code{TRUE} arguments are evaluated lazily.
+#' @return A function.
+#' @family Functionals
+#' @export
+#' @examples
+#' mean1 <- Partial(mean, na.rm = TRUE)
+#' mean1(c(1, 2, 3, NA, 4))
+Partial <- function(.f, ..., .env = parent.frame(), .lazy = TRUE) {
+  stopifnot(is.function(.f))
+  fcall <- if (.lazy) {
+    substitute(.f(...))
+  } else {
+    as.call(c(substitute(.f), list(...)))
+  }
+  fcall[[length(fcall) + 1L]] <- quote(...)
+  args <- list("..." = quote(expr = ))
+  eval(call("function", as.pairlist(args), fcall), .env)
+}
+
+#' Fast Map.
 #' 
 #' A thin wrapper around internal \code{\link{mapply}}, which can be
 #' a bit faster than base \code{\link{Map}}.
 #' 
-#' @param fn Function to apply
+#' @param fn Function to apply.
 #' @param \dots Arguments to \code{fn}; Vectors or lists.
-#' @return A list
+#' @return A list.
 #' @export
+#' @family Functionals
 #' @examples
 #' require(microbenchmark)
 #' microbenchmark(
@@ -92,8 +123,7 @@ Sequence <- function(...) {
 #' (1:100)*(101:200))
 FMap <- function(fn, ...) {
   fn <- match.fun(fn)
-  dots <- list(...)
-  .mapply(fn, dots, MoreArgs = NULL)
+  .mapply(fn, list(...), MoreArgs = NULL)
 }
 
 
@@ -104,6 +134,7 @@ FMap <- function(fn, ...) {
 #' 
 #' @param fn A function.
 #' @return A function.
+#' @family Functionals
 #' @export
 Maybe <- function(fn) {
   function(x, ...) {
@@ -113,13 +144,12 @@ Maybe <- function(fn) {
   }
 }
 
-
 #' Fail with a default value
 #' 
 #' @param default Default value.
 #' @param fn A function
 #' @param verbose Show error message
-#' 
+#' @family Functionals
 #' @export
 Fail_with <- function(default = NULL, fn, verbose = TRUE) {
   fn <- match.fun(fn)
@@ -136,11 +166,11 @@ Fail_with <- function(default = NULL, fn, verbose = TRUE) {
   }
 }
 
-
 #' Delay function call
 #' 
 #' @param delay delay in seconds.
 #' @param fn function to call
+#' @family Functionals
 #' @export
 Delay_by <- function(delay, fn) {
   fn <- match.fun(fn)
@@ -154,6 +184,7 @@ Delay_by <- function(delay, fn) {
 #' 
 #' @param n when to print a dot
 #' @param fn function call
+#' @family Functionals
 #' @export
 Dot_every <- function(n, fn) {
   i <- 1
@@ -172,6 +203,7 @@ Dot_every <- function(n, fn) {
 #' @param path path to log file
 #' @param message logging message
 #' @param fn function
+#' @family Functionals
 #' @export
 Log_to <- function(path, message="", fn) {
   fn <- match.fun(fn)
@@ -190,23 +222,6 @@ Log_to <- function(path, message="", fn) {
   }
 }
 
-#' Call a function with arguments provided individually
-#' 
-#' @param fn The function to call.
-#' @param \dots Arguments to function \code{fn}.
-#' 
-#' @export
-#' @examples
-#' funs <- list("mean", "sd", "var")
-#' sapply(funs, Call, 1:100)
-#'
-#' ## invoke an anonymous function
-#' Call(function(a, b) a*b, 3, 4)
-Call <- function(fn, ...) {
-  fn <- match.fun(fn)
-  fn(...)
-}
-
 #' Predicates
 #' 
 #' @details
@@ -216,8 +231,9 @@ Call <- function(fn, ...) {
 #' \code{Or} returns a function that returns \code{TRUE} when any the arguments,
 #' applied to the returned function's arguments, returns \code{TRUE}.
 #' 
-#' @param \dots Predicate functions
+#' @param ... Predicate functions
 #' @rdname Predicates
+#' @family Functionals
 #' @export
 And <- function(...) {
   fns <- lapply(compact(list(...)), match.fun)
@@ -230,7 +246,7 @@ And <- function(...) {
   }
 }
 
-#' @param \dots Predicate functions
+#' @param ... Predicate functions
 #' @rdname Predicates
 #' @export
 Or <- function(...) {

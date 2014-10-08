@@ -18,4 +18,11 @@ we count the parts.}
 \description{
 Split a file path and return the nth piece(s)
 }
+\seealso{
+Other string-utils: \code{\link{blanks}};
+  \code{\link{dup}}; \code{\link{pad}};
+  \code{\link{replace_ext}}; \code{\link{strip_ext}};
+  \code{\link{strsplitN}}; \code{\link{trim}};
+  \code{\link{wrap}}
+}
 

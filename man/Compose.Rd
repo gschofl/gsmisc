@@ -3,18 +3,18 @@
 \alias{Compose}
 \alias{Sequence}
 \alias{\%.\%}
-\title{Compose functions}
+\title{Compose multiple functions.}
 \usage{
 Compose(...)
 
-g \%.\% f
+f \%.\% g
 
 Sequence(...)
 }
 \arguments{
-\item{g,f}{Two functions to compose (infix notaion)}
+\item{...}{The functions to be composed.}
 
-\item{\dots}{The functions to be composed.}
+\item{f,g}{Two functions to compose (infix notation).}
 }
 \description{
 Returns a function that applies the last argument to its input, than
@@ -25,11 +25,18 @@ the penultimate argument and so on.
 applies the functions in argument-list order.
 }
 \examples{
-x <- c(1,1,2,2,3,3)
+x <- c(1, 1, 2, 2, 3, 3)
  nunique <- Compose(length, unique)
  nunique(x) == length(unique(x))
 
  ## useful in lapply constructs
  sapply(mtcars, length \%.\% unique)
+}
+\seealso{
+Other Functionals: \code{\link{And}}, \code{\link{Or}};
+  \code{\link{Call}}; \code{\link{Delay_by}};
+  \code{\link{Dot_every}}; \code{\link{FMap}};
+  \code{\link{Fail_with}}; \code{\link{Log_to}};
+  \code{\link{Maybe}}; \code{\link{Partial}}
 }
 

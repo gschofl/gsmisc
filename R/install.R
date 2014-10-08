@@ -6,17 +6,21 @@ bioc <- function() {
   biocLite(pkgs = "BiocInstaller", suppressUpdates = TRUE, suppressAutoUpdate = TRUE)
 }
 
-#' Package installer
+#' Install or update packages.
 #' 
-#' Wrapper around \code{\link{biocLite}}. In addition to the standard
-#' functionality provided \code{biocLite}, this function also download and
-#' untars the source files to \code{destdir}.
+#' \code{install_packages} is a wrapper around \code{\link{biocLite}}.
+#' In addition to the standard functionality provided \code{biocLite},
+#' this function also downloads and untars the source files to \code{destdir}.
+#' 
+#' \code{update_packages} checks for outdated packages, save the source to
+#' \code{destdir}, extract the packages in \code{destdir}, and installs them.
 #' 
 #' @param pkgs Packages
 #' @param destdir Where to put the source code.
 #' @param update call \code{\link{update_packages}}.
 #' @param ... Further arguments passed on to \code{\link{biocLite}}.
-#' 
+#' @return Called for its side effects.
+#' @family Installers
 #' @export
 install_packages <- function(pkgs, destdir = getOption("gsmisc.pkgs"), update = FALSE, ...) {
   assert_that(!missing(pkgs), is.character(pkgs))
@@ -33,28 +37,22 @@ install_packages <- function(pkgs, destdir = getOption("gsmisc.pkgs"), update = 
   }
 }
 
-
-#' Package updater
-#' 
-#' Check for outdated packages, save the source to \code{destdir},
-#' extract the packages in \code{destdir}, and install
-#' 
-#'  @param destdir Where the source code goes
-#'  @export
+#' @rdname install_packages
+#' @export
 update_packages <- function(destdir = getOption("gsmisc.pkgs")) {
   if (!is.null(destdir)) {
     destdir <- normalizePath(destdir)
     cwd <- setwd(destdir)
     extract_packages(destdir)
   }
-  tryCatch(biocValid(), error = function (e) {
-    if (grepl("package\\(s\\) out of date", e$message)) {
+  tryCatch(biocValid(), error = function(e) {
+    if (e$message %~% "package\\(s\\) out of date") {
       message('Updating ', strsplitN(e$message, ' ', 1:2))
       if (interactive())
         ask <- TRUE
       else
         ask <- FALSE
-      biocLite(destdir=destdir, ask=ask)
+      biocLite(destdir = destdir, ask = ask)
       if (!is.null(destdir)) {
         extract_packages(destdir)
       }
@@ -67,14 +65,12 @@ update_packages <- function(destdir = getOption("gsmisc.pkgs")) {
   setwd(cwd)
 }
 
-
 #' @keywords internal
 extract_packages <- function(destdir) {
   assert_that(is.writeable(destdir))
-  compressed <- dir(destdir, pattern="gz$")
+  compressed <- dir(destdir, pattern = "gz$")
   if (any(duplicated(strsplitN(compressed, '_', 1)))) {
-    stop("Duplicated gzip files in ", destdir,
-         ". Resolve manually")
+    stop("Duplicated gzip files in ", destdir, ". Resolve manually")
   }
   
   x <- lapply(compressed, untar)
@@ -99,10 +95,10 @@ extract_packages <- function(destdir) {
 #' Prompts for which of the following packages you want to install:
 #' \code{rmisc}, \code{Rentrez}, \code{biofiles}, \code{blastr},
 #' \code{ncbi}.
-#'
-#'  @export
+#' @family Installers
+#' @export
 update_github <- function() {
-  assert_that(require(devtools))
+  stopifnot(require(devtools))
   pkgs <- c("gsmisc", "reutils", "biofiles", "blastr", "ncbi", "genoslideR")
   cat("Update packages:\n")
   cat(sprintf("%s) %s", seq_along(pkgs), pkgs), sep="\n")
@@ -132,7 +128,6 @@ update_github <- function() {
   }
 }
 
-
 #' Require one or more packages
 #' 
 #' A simple wrapper for \code{\link[base]{require}} that allows
@@ -140,8 +135,7 @@ update_github <- function() {
 #' cannot be loaded.
 #' 
 #' @param ... Package names (as strings).
-#' @seealso
-#' \code{\link[base]{require}}
+#' @seealso \code{\link[base]{require}}
 #' @export
 require.all <- function(...) {
   pkgs <- as.character(list(...))
@@ -158,7 +152,6 @@ require.all <- function(...) {
   return(invisible(success))
 }
 
-
 #' Load saved datasets
 #' 
 #' Reload \code{RData} datasets. Wrapper for \code{\link[base]{load}}
@@ -169,17 +162,17 @@ require.all <- function(...) {
 #' @param verbose print item names during loading.
 #' @return A character vector of the names of objects created.
 #' @export
-load.all <- function(cache = "./cache", envir=.GlobalEnv, verbose=FALSE) {
-  rdata <- dir(cache, pattern="rda(ta)?$", full.names=TRUE, ignore.case=TRUE)
+load.all <- function(cache = "./cache", envir = .GlobalEnv, verbose = FALSE) {
+  rdata <- dir(cache, pattern = "rda(ta)?$", full.names = TRUE, ignore.case = TRUE)
   if (all_empty(rdata)) {
     return(invisible())
   }
-  rcon <- lapply(normalizePath(rdata), Compose(gzcon, gzfile))
+  rcon <- lapply(normalizePath(rdata), gzcon %.% gzfile)
   on.exit(lapply(rcon, close))
   success <- lapply(rcon, function (con) {
-    tryCatch(load(con, envir=envir, verbose=verbose), error = function (e) e )
+    tryCatch(load(con, envir = envir, verbose = verbose), error = function(e) e )
   })
-  if (any(idx <- vapply(success, is, "error", FUN.VALUE=logical(1)))) {
+  if (any(idx <- vapply(success, is, "error", FUN.VALUE = logical(1)))) {
     warning("Failed to load:\n", paste(rdata[idx], collapse = "\n"), call. = FALSE)
     success <- success[!idx]
   }

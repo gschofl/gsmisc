@@ -6,12 +6,22 @@
 are_null(x)
 }
 \arguments{
-\item{x}{object to test}
+\item{x}{An object to test.}
+
+\item{A}{logical vector.}
 }
 \description{
 Which elements in a list are NULL?
 }
 \examples{
-are_null(list(1,NULL,3))
+are_null(list(1, NULL, 3))
+}
+\seealso{
+Other Tests: \code{\link{all_empty}},
+  \code{\link{are_empty}}, \code{\link{is.empty}};
+  \code{\link{all_scalar}}, \code{\link{are_scalar}},
+  \code{\link{is.scalar}}, \code{\link{is.string}};
+  \code{\link{are_false}}; \code{\link{are_true}};
+  \code{\link{has_command}}; \code{\link{is.installed}}
 }
 

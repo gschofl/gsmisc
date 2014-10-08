@@ -1,4 +1,4 @@
-#' @include assertions.R
+#' @include tests.R
 NULL
 
 #' Filter "empty" elements from a list.

@@ -40,4 +40,11 @@ strsplitN(str, ", ", 1:2, collapse = "--")
 ## [1] "Lorem--ipsum"
 ## [2] "consectetur--adipisicing"
 }
+\seealso{
+Other string-utils: \code{\link{blanks}};
+  \code{\link{dup}}; \code{\link{pad}};
+  \code{\link{replace_ext}}; \code{\link{split_path}};
+  \code{\link{strip_ext}}; \code{\link{trim}};
+  \code{\link{wrap}}
+}
 
