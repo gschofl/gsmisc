@@ -33,16 +33,11 @@ options(xtable.type = "html")
 load.project()
 ```
 
-# Project overview
+# Projektübersicht
 
-An example table:
 
-First Header | Second Header
--------------|--------------
-Content 1    | Content 2
-Content 3    | Content 4
 
-# Load packages and data
+# Paket- und Datenimport
 ```{r load_packages, message=FALSE, results='hide'}
 library("gsmisc")
 library("magrittr")
@@ -50,15 +45,13 @@ library("plyr")
 library("ggplot2")
 ```
 
-# Data preparation 
+# Datenaufbereitung
 
-# Exploratory Analysis and Diagnostics
+# Analysen
 
-# Q 1
+## Problem 1
 
-# Q 2
+## Problem 2
 
-# Review
-
-
+# Bewertung
 

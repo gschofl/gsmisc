@@ -31,7 +31,8 @@ rproj <- function(pkg, path = 'all') {
                       "SaveWorkspace: Default",  "AlwaysSaveHistory: Default",
                       "", "EnableCodeIndexing: Yes",  "UseSpacesForTab: Yes",
                       "NumSpacesForTab: 2", "Encoding: UTF-8",  "",
-                      "RnwWeave: knitr", "LaTeX: pdfLaTeX")
+                      "RnwWeave: knitr", "LaTeX: pdfLaTeX", "", "AutoAppendNewline: Yes",
+                      "StripTrailingWhitespace: Yes")
 
   if (is.name(pkg)) {
     pkg <- gsub("^\"|\"$", '', deparse(substitute(pkg)))
@@ -153,8 +154,11 @@ createProject <- function(project = 'myProject',
   file.copy(from = system.file('defaults/config/template.rproject', package = 'gsmisc'),
             to = file.path(project.path, paste0(basename(project.path), '.Rproj')))
   
-  file.copy(from = system.file('defaults/config/template.Rmd', package = 'gsmisc'),
-            to = file.path(project.path, 'reports/report.Rmd'))
+  file.copy(from = system.file('defaults/config/template.de.Rmd', package = 'gsmisc'),
+            to = file.path(project.path, 'reports/html_report.Rmd'))
+  
+  file.copy(from = system.file('defaults/config/template.bootstrap.de.Rmd', package = 'gsmisc'),
+            to = file.path(project.path, 'reports/bootstrap_report.Rmd'))
   
   file.copy(from = system.file('defaults/config/custom.css', package = 'gsmisc'),
             to = file.path(project.path, 'reports/custom.css'))
@@ -197,7 +201,7 @@ createProject <- function(project = 'myProject',
 #' }
 #' 
 createPackage <- function(name = "dkms.utils", path = getOption("gsmisc.devel"),
-                          use_test = TRUE, use_doc = TRUE,use_rcpp = FALSE,
+                          use_test = TRUE, use_doc = TRUE, use_rcpp = FALSE,
                           use_travis = FALSE, use_vignette = FALSE) {
   pkg <- normalizePath(file.path(path, name), mustWork = FALSE)
   devtools::create(pkg, rstudio = TRUE)

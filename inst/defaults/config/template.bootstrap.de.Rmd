@@ -1,0 +1,48 @@
+---
+output:
+  knitrBootstrap::bootstrap_document:
+    title: "@title@"
+    theme: spacelab
+    highlight: solarized - light
+    theme.chooser: TRUE
+    highlight.chooser: TRUE
+    menu: TRUE
+---
+
+```{r setup, include=FALSE}
+Sys.setenv("RSTUDIO_PANDOC" = "/usr/bin")
+library("data.table")
+library("ProjectTemplate")
+library("knitr")
+opts_knit$set(root.dir = '..', output.dir = '.', verbose = TRUE, width = 80)
+bwd <- basename(getwd())
+if (bwd %in% c("src", "doc", "reports")) {
+ setwd('..')
+ load.project()
+}
+options(xtable.type = "html")
+```
+
+# Projektübersicht
+
+## Hintergrund
+
+## Ziele
+
+# Paket- und Datenimport
+```{r load_packages, message=FALSE, results='hide'}
+library("gsmisc")
+library("magrittr")
+library("plyr")
+library("ggplot2")
+```
+
+# Datenaufbereitung
+
+# Analysen
+
+## Problem 1
+
+## Problem 2
+
+# Bewertung
