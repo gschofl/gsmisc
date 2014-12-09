@@ -56,8 +56,7 @@ update_packages <- function(destdir = getOption("gsmisc.pkgs")) {
       if (!is.null(destdir)) {
         extract_packages(destdir)
       }
-    }
-    else {
+    } else {
       message("Nothing to update")
     }
   })
@@ -65,6 +64,7 @@ update_packages <- function(destdir = getOption("gsmisc.pkgs")) {
   setwd(cwd)
 }
 
+#' @importFrom assertthat is.writeable
 #' @keywords internal
 extract_packages <- function(destdir) {
   assert_that(is.writeable(destdir))
@@ -89,7 +89,6 @@ extract_packages <- function(destdir) {
   }
 }
 
-
 #' A quick installer for my R packages on GitHub
 #' 
 #' Prompts for which of the following packages you want to install:
@@ -98,7 +97,7 @@ extract_packages <- function(destdir) {
 #' @family Installers
 #' @export
 update_github <- function() {
-  stopifnot(require(devtools))
+  stopifnot(require('devtools', character.only = TRUE))
   pkgs <- c("gsmisc", "reutils", "biofiles", "blastr", "ncbi", "genoslideR")
   cat("Update packages:\n")
   cat(sprintf("%s) %s", seq_along(pkgs), pkgs), sep="\n")
