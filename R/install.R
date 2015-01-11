@@ -25,10 +25,10 @@ bioc <- function() {
 install_packages <- function(pkgs, destdir = getOption("gsmisc.pkgs"), update = FALSE, ...) {
   assert_that(!missing(pkgs), is.character(pkgs))
   if (!require("BiocInstaller", character.only = TRUE)) bioc()
-  BiocInstaller::biocLite(pkgs, suppressUpdates=TRUE, destdir=destdir, ...)
+  BiocInstaller::biocLite(pkgs, suppressUpdates = TRUE, destdir = destdir, ...)
   
   if (update) {
-    update_packages(destdir=destdir)
+    update_packages(destdir = destdir)
   } else if (!is.null(destdir)) {
     destdir <- normalizePath(destdir)
     cwd <- setwd(destdir)
@@ -87,6 +87,21 @@ extract_packages <- function(destdir) {
     message("Extracted to ", destdir, ": ",
             paste0(compressed, collapse=', '))
   }
+}
+
+#' Upgrade Bioconductor to the latest available version.
+#' 
+#' Downloads the latest version of the BiocInstaller package,
+#' and upgrades all currently installed packages to the latest
+#' repositories for this version of R.
+#' 
+#' @details 
+#' Wraps \code{biocLite("BiocUpgrade")}
+#' 
+#' @export
+upgrade_bioc <- function() {
+  if (!require("BiocInstaller", character.only = TRUE)) bioc()
+  BiocInstaller::biocLite("BiocUpgrade")
 }
 
 #' A quick installer for my R packages on GitHub
