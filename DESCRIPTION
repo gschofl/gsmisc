@@ -42,6 +42,7 @@ Collate:
     'linebreak.R'
     'misc.R'
     'multiplot.R'
+    'packages.R'
     'project.R'
     'regexp-utils.R'
     'sqlite-utils.R'

@@ -104,6 +104,22 @@ upgrade_bioc <- function() {
   BiocInstaller::biocLite("BiocUpgrade")
 }
 
+#' Install different sets of packages
+#' 
+#' Different sets of packages:
+#' \code{base}, \code{datatools}, \code{hadleyverse}, \code{stats},
+#' \code{phlyo}, \code{bioc}.
+#' 
+#' @param which Which set of packages do we want to install.
+#' @export 
+install_pkg_set <- function(which = 'base', ...) {
+  which <- match.arg(which, c("base", "datatools", "hadleyverse", "stats",
+                              "phylo", "bioc"))
+  which <- paste0("pkgs.", which)
+  pkgs <- get(which, envir = asNamespace("gsmisc"))  
+  install_packages(pkgs = pkgs, ...)
+}
+
 #' A quick installer for my R packages on GitHub
 #' 
 #' Prompts for which of the following packages you want to install:
