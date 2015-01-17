@@ -11,9 +11,10 @@
 #' \dontrun{
 #' plotInheritance(getClasses("package:Rentrez"))
 #' }
-plotInheritance <- function (classes, subclasses = FALSE, ...) {
-  if (!require("Rgraphviz", quietly=TRUE))
-    stop("Only implemented if Rgraphviz is available")
+plotInheritance <- function(classes, subclasses = FALSE, ...) {
+  if (!requireNamespace("Rgraphviz", quietly = TRUE)) {
+    stop("Please install Rgraphviz", call. = FALSE)
+  }
   mm <- classesToAM(classes, subclasses)
   classes <- rownames(mm)
   rownames(mm) <- colnames(mm)
@@ -37,9 +38,11 @@ plotInheritance <- function (classes, subclasses = FALSE, ...) {
 #' browseURL(r[1])
 #' }
 google <- function(query = "", n = 10) {
-  stopifnot(require(RCurl))
+  if (!requireNamespace("RCurl", quietly = TRUE)) {
+    stop("Please install RCurl", call. = FALSE)
+  }
   h <- basicTextGatherer()
-  url <- paste0('https://www.google.de/search?tbs=li:1&q=', curlEscape(query))
+  url <- paste0("https://www.google.de/search?tbs=li:1&q=", curlEscape(query))
   curlPerform(url = url, writefunction = h$update, .opts = list(timeout = 6))
   ## Print the matching parts on a separate output line each
   stream <- gsub("&amp", "", gsub("/url?q=", "", system("grep -oP '\\/url\\?q=.+?&amp'", input = h$value(), intern = TRUE), fixed = TRUE))

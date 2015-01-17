@@ -38,8 +38,8 @@ compactChar <- function(x) {
 #' @rdname compact
 #' @export
 compactNA <- function(x) {
-  filterNA <- function(x) suppressWarnings(is.na(x)) %||% FALSE
-  x[!vapply(x, filterNA, FALSE, USE.NAMES = FALSE)]
+  filter_na <- function(x) suppressWarnings(is.na(x)) %||% FALSE
+  x[!vapply(x, filter_na, FALSE, USE.NAMES = FALSE)]
 }
 
 #' @rdname compact

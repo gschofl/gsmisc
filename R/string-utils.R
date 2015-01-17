@@ -10,7 +10,7 @@ NULL
 #' @export
 #' @examples
 #' wrap(c("abc", "xyz"), "---")
-wrap <- function (x, wrap = '"') {
+wrap <- function(x, wrap = '"') {
   stopifnot(is.vector(x))
   sprintf('%s%s%s', wrap, x, wrap)
 }
@@ -25,7 +25,7 @@ wrap <- function (x, wrap = '"') {
 #' @examples
 #' x <- " abc\n\t" 
 #' trim(x)
-trim <- function (x, trim = '\\s+') {
+trim <- function(x, trim = '\\s+') {
   stopifnot(is.vector(x))
   gsub(paste0("^", trim, "|", trim, "$"), '', x)
 }
@@ -39,11 +39,11 @@ trim <- function (x, trim = '\\s+') {
 #' @export
 #' @examples
 #' dup("#", 1:10)
-dup <- function (x, n) {
+dup <- function(x, n) {
   stopifnot(is.string(x))
   if (any(n < 0))
     n[n < 0] <- 0
-  vapply(.mapply(rep.int, list(rep.int(x, length(n)), n), NULL), paste0, collapse="", "")
+  vapply(.mapply(rep.int, list(rep.int(x, length(n)), n), NULL), paste0, collapse = "", "")
 }
 
 #' Create blank strings with a given number of characters.
@@ -66,7 +66,7 @@ blanks <- Partial(dup, x = " ")
 #' @return A character vector.
 #' @family string-utils
 #' @export
-pad <- function (x, n = 10, where = 'left', pad = ' ') {
+pad <- function(x, n = 10, where = 'left', pad = ' ') {
   x <- as.character(x)
   stopifnot(is.scalar(n), is.scalar(where), is.scalar(pad))
   where <- match.arg(where, c("left", "right", "both"))

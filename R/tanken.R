@@ -1,4 +1,4 @@
-tanken.sql <- '
+tanken.sql <- "
 CREATE TABLE tanken(
         datum           CHAR(10),
 tankstelle      VARCHAR(50),
@@ -8,7 +8,7 @@ menge           NUMBER,
 betrag          NUMBER,
 kilometerstand  NUMBER
 );
-'
+"
 
 is.valid_date <- function(x) {
   grepl("\\d{2}\\.\\d{2}\\.\\d{4}", x)  

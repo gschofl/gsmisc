@@ -5,7 +5,7 @@ NULL
 # "Advanced R Programming" (http://adv-r.had.co.nz/)
 
 #' Call a function with arguments provided individually.
-#' 
+#'
 #' @param fn The function to call.
 #' @param \dots Arguments to function \code{fn}.
 #' @return The return value of the function call.
@@ -191,7 +191,7 @@ Dot_every <- function(n, fn) {
   fn <- match.fun(fn)
   function(...) {
     if (i %% n == 0) {
-      cat('.')
+      cat(".")
     }
     i <<- i + 1
     fn(...)
@@ -205,7 +205,7 @@ Dot_every <- function(n, fn) {
 #' @param fn function
 #' @family Functionals
 #' @export
-Log_to <- function(path, message="", fn) {
+Log_to <- function(path, message = "", fn) {
   fn <- match.fun(fn)
   now <- function(accuracy = 4) {
     paste0("-- ", format(Sys.time(), paste0("%M:%OS", accuracy)), " -- ")
@@ -216,7 +216,7 @@ Log_to <- function(path, message="", fn) {
   } else {
     assert_that(file.exists(path))
     function(...) {
-      cat(now(), message, sep="", file=path, append=TRUE)
+      cat(now(), message, sep = "", file = path, append = TRUE)
       fn(...)
     }
   }

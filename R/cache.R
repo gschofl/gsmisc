@@ -1,8 +1,8 @@
 #' Register a caching environment
-#' 
+#'
 #' Generate a \code{cache} object, with \code{set}, \code{get},
 #' \code{exists}, \code{ls}, and \code{rm} methods.
-#' 
+#'
 #' @export
 #' @examples
 #' cache <- new_cache()
@@ -13,26 +13,26 @@
 #' cache$exists("b")
 #' cache$exists("c")
 #' cache$rm()     
-new_cache <- function () {
+new_cache <- function() {
   
   cache <- NULL
   
-  set_val <- function (key, value) {
+  set_val <- function(key, value) {
     assert_that(is.string(key))
     assign(key, value, cache)
   }
-  get_val <- function (key) {
+  get_val <- function(key) {
     assert_that(is.string(key))
     get(key, cache, inherits = FALSE)
   }
-  key_exists <- function (key) {
+  key_exists <- function(key) {
     assert_that(is.string(key))
     exists(key, cache, inherits = FALSE)
   }
-  .list <- function () {
+  .list <- function() {
     ls(cache)
   }
-  .remove <- function () {
+  .remove <- function() {
     cache <<- new.env(hash = TRUE, emptyenv())
   }
   
@@ -51,10 +51,9 @@ new_cache <- function () {
 }
 
 #' @export
-print.cache <- function (object) {
+print.cache <- function(object) {
   lo <- length(object$ls())
   showme <- sprintf("A datacache containing %s object%s.",
                     lo, if (lo == 1) "" else "s")
-  cat(showme, sep='\n')
+  cat(showme, sep = "\n")
 }
-

@@ -2,10 +2,10 @@
 NULL
 
 #' A null coalescing operator.
-#' 
+#'
 #' If the LHS eveluates to \code{NULL}, a zero-length vector, or
 #' an empty string, return the RHS, otherwise return the LHS.
-#' 
+#'
 #' @param a Some value.
 #' @param b Some default value.
 #' @return \code{a}, if \code{a} is not \code{NULL}, not an empty
@@ -73,4 +73,3 @@ NULL
 #' @return Matching elements in \code{target}
 #' @export
 "%~%" <- function(x, pattern) grep(pattern, x, value = TRUE)
-

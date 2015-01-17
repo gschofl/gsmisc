@@ -6,6 +6,12 @@ bioc <- function() {
   biocLite(pkgs = "BiocInstaller", suppressUpdates = TRUE, suppressAutoUpdate = TRUE)
 }
 
+assure_bioc <- function() {
+  if (!requireNamespace("BiocInstaller", quietly = TRUE)) {
+    bioc()
+  }
+}
+
 #' Install or update packages.
 #' 
 #' \code{install_packages} is a wrapper around \code{\link{biocLite}}.
@@ -24,7 +30,7 @@ bioc <- function() {
 #' @export
 install_packages <- function(pkgs, destdir = getOption("gsmisc.pkgs"), update = FALSE, ...) {
   assert_that(!missing(pkgs), is.character(pkgs))
-  if (!require("BiocInstaller", character.only = TRUE)) bioc()
+  assure_bioc()
   BiocInstaller::biocLite(pkgs, suppressUpdates = TRUE, destdir = destdir, ...)
   
   if (update) {
@@ -47,11 +53,8 @@ update_packages <- function(destdir = getOption("gsmisc.pkgs")) {
   }
   tryCatch(biocValid(), error = function(e) {
     if (e$message %~% "package\\(s\\) out of date") {
-      message('Updating ', strsplitN(e$message, ' ', 1:2))
-      if (interactive())
-        ask <- TRUE
-      else
-        ask <- FALSE
+      message("Updating ", strsplitN(e$message, " ", 1:2))
+      ask <- if (interactive()) TRUE else FALSE
       biocLite(destdir = destdir, ask = ask)
       if (!is.null(destdir)) {
         extract_packages(destdir)
@@ -69,7 +72,7 @@ update_packages <- function(destdir = getOption("gsmisc.pkgs")) {
 extract_packages <- function(destdir) {
   assert_that(is.writeable(destdir))
   compressed <- dir(destdir, pattern = "gz$")
-  if (any(duplicated(strsplitN(compressed, '_', 1)))) {
+  if (any(duplicated(strsplitN(compressed, "_", 1)))) {
     stop("Duplicated gzip files in ", destdir, ". Resolve manually")
   }
   
@@ -85,7 +88,7 @@ extract_packages <- function(destdir) {
   
   if (NROW(compressed)) {
     message("Extracted to ", destdir, ": ",
-            paste0(compressed, collapse=', '))
+            paste0(compressed, collapse = ", "))
   }
 }
 
@@ -100,7 +103,7 @@ extract_packages <- function(destdir) {
 #' 
 #' @export
 upgrade_bioc <- function() {
-  if (!require("BiocInstaller", character.only = TRUE)) bioc()
+  assure_bioc()
   BiocInstaller::biocLite("BiocUpgrade")
 }
 
@@ -112,7 +115,7 @@ upgrade_bioc <- function() {
 #' 
 #' @param which Which set of packages do we want to install.
 #' @export 
-install_pkg_set <- function(which = 'base', ...) {
+install_pkg_set <- function(which = "base", ...) {
   which <- match.arg(which, c("base", "datatools", "hadleyverse", "stats",
                               "phylo", "bioc"))
   which <- paste0("pkgs.", which)
@@ -128,15 +131,14 @@ install_pkg_set <- function(which = 'base', ...) {
 #' @family Installers
 #' @export
 update_github <- function() {
-  stopifnot(require('devtools', character.only = TRUE))
   pkgs <- c("gsmisc", "reutils", "biofiles", "blastr", "ncbi", "genoslideR")
   cat("Update packages:\n")
-  cat(sprintf("%s) %s", seq_along(pkgs), pkgs), sep="\n")
+  cat(sprintf("%s) %s", seq_along(pkgs), pkgs), sep = "\n")
   
   while (TRUE) {
     msg <- "Which packages do you want to upgrade? [a(ll)|12345|q(uit)]: "
-    which <- tolower(strsplit(gsub('\\s+', '', readline(msg)), '')[[1]])
-    if (!paste(which, collapse='') %in% c("a","all","q","quit")) {
+    which <- tolower(strsplit(gsub("\\s+", "", readline(msg)), "")[[1]])
+    if (!paste(which, collapse = "") %in% c("a", "all", "q", "quit")) {
       if (!any(is.na(idx <- suppressWarnings(as.numeric(which))))
           && max(idx) <= length(pkgs)
           && min(idx) > 0) {
@@ -146,14 +148,14 @@ update_github <- function() {
         message("Please submit 'all', 'quit', or numbers between 1 and ", length(pkgs))
       }
     } else {
-      if (which[1] == 'q') 
-        pkgs <- ''
+      if (which[1] == "q") 
+        pkgs <- ""
       break
     }
   }
   
   if (!all_empty(pkgs)) {
-    pkgs <- paste0('gschofl/', pkgs)
+    pkgs <- paste0("gschofl/", pkgs)
     install_github(pkgs)
   }
 }
@@ -172,12 +174,12 @@ require.all <- function(...) {
   if (all_empty(pkgs)) {
     return(invisible())
   }
-  success <- suppressMessages( suppressWarnings(
-    unlist(lapply(pkgs, require, character.only=TRUE))
+  success <- suppressMessages(suppressWarnings(
+    unlist(lapply(pkgs, require, character.only = TRUE))
   ))
   if (!all(success)) {
-    warning("Failed to load package(s):\n", paste(pkgs[!success], collapse=", "),
-            call.=FALSE)
+    warning("Failed to load package(s):\n", paste(pkgs[!success], collapse = ", "),
+            call. = FALSE)
   }
   return(invisible(success))
 }
@@ -199,7 +201,7 @@ load.all <- function(cache = "./cache", envir = .GlobalEnv, verbose = FALSE) {
   }
   rcon <- lapply(normalizePath(rdata), gzcon %.% gzfile)
   on.exit(lapply(rcon, close))
-  success <- lapply(rcon, function (con) {
+  success <- lapply(rcon, function(con) {
     tryCatch(load(con, envir = envir, verbose = verbose), error = function(e) e )
   })
   if (any(idx <- vapply(success, is, "error", FUN.VALUE = logical(1)))) {

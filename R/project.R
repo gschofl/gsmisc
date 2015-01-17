@@ -12,21 +12,21 @@ open_rstudio_project <- function(rproj) {
 }
 
 #' Open an RStudio project from R
-#' 
+#'
 #' Quickly open a package (ar any  directory in the search path) as an RStudio
 #' project. The search paths are defined by the custom options \code{gsmisc.pkgs},
 #' \code{gsmisc.proj}, and \code{gsmisc.devel}, which I have preset in \code{.Rprofile}.
 #' If none of these is defined \code{rproj} will fall back to the current working
 #' directory.
-#'  
+#'
 #' @param pkg The name of a package (or project directory) given as a Symbol.
 #' @param path One of 'all', 'pkgs', 'proj', or 'devel'.
-#'  
+#'
 #' @return Opens RStudio.
 #' @seealso Inspired by \href{http://stackoverflow.com/questions/18426726/system-open-rstudio-close-connection}{this} question on stackoverflow
 #' @export  
-rproj <- function(pkg, path = 'all') {
-  
+rproj <- function(pkg, path = "all") {
+
   Rproj.template <- c("Version: 1.0", "", "RestoreWorkspace: Default",
                       "SaveWorkspace: Default",  "AlwaysSaveHistory: Default",
                       "", "EnableCodeIndexing: Yes",  "UseSpacesForTab: Yes",
@@ -41,17 +41,17 @@ rproj <- function(pkg, path = 'all') {
   } else {
     stop("'pkg' must be a symbol or a string")
   }
-  devel.path <- getOption('gsmisc.devel') %|null|% '.'
-  proj.path  <- getOption('gsmisc.proj') %|null|% '.'
-  pkgs.path  <- getOption('gsmisc.pkgs') %|null|% '.'
+  devel.path <- getOption("gsmisc.devel") %|null|% "."
+  proj.path  <- getOption("gsmisc.proj") %|null|% "."
+  pkgs.path  <- getOption("gsmisc.pkgs") %|null|% "."
   path <- switch(path,
                  all = normalizePath(unique(c(devel.path, proj.path, pkgs.path))),
                  devel = normalizePath(devel.path),
                  proj = normalizePath(proj.path),
                  pkgs = normalizePath(pkgs.path),
-                 normalizePath(path, mustWork=TRUE))
+                 normalizePath(path, mustWork = TRUE))
   
-  pkg_path <- grep(pkg, dir(path, full.names=TRUE, ignore.case=TRUE), value=TRUE)
+  pkg_path <- grep(pkg, dir(path, full.names = TRUE, ignore.case = TRUE), value = TRUE)
   
   while (length(unique(basename(pkg_path))) > 1L) {
     pkg_path <- unique(dirname(pkg_path))
@@ -59,21 +59,20 @@ rproj <- function(pkg, path = 'all') {
   
   if (length(pkg_path) > 1) {
     warning("Found ", length(pkg_path), " packages of  name ", sQuote(pkg), ".\n",
-            "Will open the first: ", sQuote(pkg_path[1]), call.=FALSE, immediate.=TRUE)
+            "Will open the first: ", sQuote(pkg_path[1]), call. = FALSE, immediate. = TRUE)
     pkg_path <- pkg_path[1]
   } else if (length(pkg_path) < 1) {
-    stop("Package ", sQuote(pkg), " not found.", call.=FALSE)
+    stop("Package ", sQuote(pkg), " not found.", call. = FALSE)
   }
   
-  rproj_loc <- dir(pkg_path, pattern="*.Rproj", full.names=TRUE)
+  rproj_loc <- dir(pkg_path, pattern = "*.Rproj", full.names = TRUE)
   if (length(rproj_loc) < 1) {
-    rproj_loc <- file.path(pkg_path, paste0(pkg, '.Rproj'))
+    rproj_loc <- file.path(pkg_path, paste0(pkg, ".Rproj"))
     cat(paste(Rproj.template, collapse = "\n"), file = rproj_loc)  
   }
   
   open_rstudio_project(rproj_loc)
 }
-
 
 #' Create a modified \href{http://projecttemplate.net/getting_started.html}{ProjectTemplate}
 #' project.
@@ -94,15 +93,17 @@ rproj <- function(pkg, path = 'all') {
 #'   \code{\link[ProjectTemplate]{create.project}} function in John Myles White's
 #'   \code{ProjectTemplate} package to allow me using my custom directory structure.
 #' @export
-createProject <- function(project = 'myProject',
+createProject <- function(project = "myProject",
                           path = getOption("gsmisc.proj"),
                           merge_strategy = c("require.empty", "allow.non.conflict"),
                           open = TRUE,
                           packrat = FALSE) {
-  stopifnot(require('ProjectTemplate'), !missing(project))
+  if (!requireNamespace("ProjectTemplate", quietly = TRUE)) {
+    stop("Please install ProjectTemplate", call. = FALSE)
+  }
   project_name <- normalizePath(file.path(path, project), mustWork = FALSE)
   assert_that(is.writeable(dirname(project_name)))
-  template_name <- 'template'
+  template_name <- "template"
   temp_dir <- tempfile("ProjectTemplate")
   on.exit(unlink(temp_dir, recursive = TRUE), add = TRUE)
   untar(system.file(file.path("defaults", paste0(template_name, ".tar")), package = "gsmisc"),
@@ -116,7 +117,9 @@ createProject <- function(project = 'myProject',
     .create_new_project(template_path, project_name)
   }
   if (packrat) {
-    stopifnot(require("packrat", character.only = TRUE))
+    if (!requireNamespace("packrat", quietly = TRUE)) {
+      stop("Please install packrat", call. = FALSE)
+    }
     packrat::init(project = project_name)
   }
   if (open) {
@@ -220,7 +223,7 @@ createPackage <- function(name = "dkms.utils", path = getOption("gsmisc.devel"),
   if (use_vignette) {
     devtools::use_vignette(name, pkg)
   }
-  rproj <- file.path(pkg, paste0(name, '.Rproj'))
+  rproj <- file.path(pkg, paste0(name, ".Rproj"))
   open_rstudio_project(rproj)
 }
 

@@ -12,12 +12,12 @@
 #' @export
 #' @examples
 #' ##
-Match  <-  function (pattern, str, i=NULL, perl=TRUE) {
+Match  <-  function(pattern, str, i = NULL, perl = TRUE) {
   if (is.null(i)) {
-    strmatch(pattern, str, perl=perl, capture=FALSE)
+    strmatch(pattern, str, perl = perl, capture = FALSE)
   }
   else {
-    lapply(strmatch(pattern, str, perl=perl, capture=TRUE)[["capture"]], "[", i)
+    lapply(strmatch(pattern, str, perl = perl, capture = TRUE)[["capture"]], "[", i)
   }
 }
 
@@ -36,50 +36,50 @@ Match  <-  function (pattern, str, i=NULL, perl=TRUE) {
 #' @export
 #' @examples
 #' ##
-strmatch <- function (pattern, str, capture=TRUE, perl=TRUE, global=TRUE, ignore.case=FALSE) {
-
-  if (!is.atomic(str))
+strmatch <- function(pattern, str, capture = TRUE, perl = TRUE,
+                     global = TRUE, ignore.case = FALSE) {
+  if (!is.atomic(str)) {
     stop("String must be an atomic vector", call. = FALSE)
-
-  if (!is.character(str)) 
-    string <- as.character(str)
-
-  if (!is.character(pattern)) 
-    stop("Pattern must be a character vector", call. = FALSE)
-
-  if (global)
-    m <- gregexpr(pattern, str, perl=perl, ignore.case=ignore.case)
-  else
-    m <- regexpr(pattern, str, perl=perl, ignore.case=ignore.case)
-
-  .matcher <- function (str, m) {
-    Map( function (str, start, len) substring(str, start, start + len - 1L), 
-         str, m, lapply(m, attr, "match.length"), USE.NAMES=FALSE)
   }
-
+  if (!is.character(str)) {
+    string <- as.character(str)
+  }
+  if (!is.character(pattern)) {
+    stop("Pattern must be a character vector", call. = FALSE)
+  }
+  if (global) {
+    m <- gregexpr(pattern, str, perl = perl, ignore.case = ignore.case)
+  } else {
+    m <- regexpr(pattern, str, perl = perl, ignore.case = ignore.case)
+  }
+  .matcher <- function(str, m) {
+    Map(function(str, start, len) substring(str, start, start + len - 1L), 
+        str, m, lapply(m, attr, "match.length"), USE.NAMES = FALSE)
+  }
+  
   match <- if (capture) {
-    .capture.matcher <- function (str, m) {
-      cap <- Map( function (str, start, len) {
-        mapply( function (str, start, len) {
+    .capture.matcher <- function(str, m) {
+      cap <- Map(function(str, start, len) {
+        mapply(function(str, start, len) {
           substr(str, start, start + len - 1L) 
-        }, str, start, len, USE.NAMES=FALSE)
+        }, str, start, len, USE.NAMES = FALSE)
       }, str, lapply(m, attr, "capture.start"),
-                  lapply(m, attr, "capture.length"), USE.NAMES=FALSE)
-
+      lapply(m, attr, "capture.length"), USE.NAMES = FALSE)
+      
       cap_names <- lapply(m, attr, "capture.names")
       if (all(nchar(cap_names) > 0)) {
-        if (!all(mapply(function (c, n) length(c) == length(n), cap, cap_names)))
-          warning("Mismatch between number of captures and capture names", call.=TRUE)
-        
-        cap <- mapply( function (val, name) `names<-`(val, name),
-                    cap, cap_names, USE.NAMES=FALSE)
+        if (!all(mapply(function (c, n) length(c) == length(n), cap, cap_names))) {
+          warning("Mismatch between number of captures and capture names", call. = TRUE)
+        }
+        cap <- mapply(function(val, name) `names<-`(val, name),
+                      cap, cap_names, USE.NAMES = FALSE)
       }
       
       cap
     }
 
-    list(match=.matcher(str, m),
-         capture=if (!is.null(attributes(m[[1]])$capture.start))
+    list(match = .matcher(str, m),
+         capture = if (!is.null(attributes(m[[1]])$capture.start))
            .capture.matcher(str, m) else NULL)
   } else {
     match <- .matcher(str, m)

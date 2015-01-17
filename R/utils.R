@@ -1,18 +1,19 @@
 #' @export
-merge_list <- function (x, y, ...) {
+merge_list <- function(x, y, ...) {
   if (length(x) == 0) return(y)
   if (length(y) == 0) return(x) 
   i <- is.na(match(names(y), names(x)))
   if (any(i)) {
-    x[names(y)[which(i)]] = y[which(i)]
+    x[names(y)[which(i)]] <- y[which(i)]
   }
   x
 }
 
 #' @export
-merge_dups <- function (x) {
-  if (all_empty(x))
+merge_dups <- function(x) {
+  if (all_empty(x)) {
     return(NULL)
+  }
   x_names <- names(x)
   a <- x[!duplicated(x_names)]
   b <- x[duplicated(x_names)]
@@ -21,7 +22,7 @@ merge_dups <- function (x) {
 
 ## pinched from the lattice package.
 #' @export
-modify_list <- function (a, b, mode=c("replace",  "merge")) {
+modify_list <- function(a, b, mode = c("replace",  "merge")) {
   assert_that(is.list(a))
   assert_that(is.list(b))
   mode <- match.arg(mode)
@@ -31,8 +32,8 @@ modify_list <- function (a, b, mode=c("replace",  "merge")) {
       modify_list(a[[v]], b[[v]])
     } else {
       switch(mode,
-             replace=b[[v]],
-             merge=unique(c(a[[v]], b[[v]])))
+             replace = b[[v]],
+             merge = unique(c(a[[v]], b[[v]])))
     }
   }
   a

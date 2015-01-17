@@ -4,13 +4,13 @@
 NULL
 
 #' Compare local and remote file timestamp and/or size
-#' 
+#'
 #' @param file Path to local file.
 #' @param url URL of remote source.
 #' @param time Compare the timestamps (default: \code{TRUE}).
 #' @param size Compare the file sizes (default: \code{FALSE}).
 #' @param .message Print a message
-#' 
+#'
 #' @return \code{TRUE} if the local file does not exist,
 #' if the remote source is more recent than the local file,
 #' or if the size of the remote source differs from the local file.

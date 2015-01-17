@@ -25,8 +25,8 @@ multiplot <- function(..., plotlist = NULL, cols = 1, layout = NULL) {
     # Make the panel
     # ncol: Number of columns of plots
     # nrow: Number of rows needed, calculated from # of cols
-    layout <- matrix(seq(1, cols * ceiling(num_plots/cols)),
-                     ncol = cols, nrow = ceiling(num_plots/cols))
+    layout <- matrix(seq(1, cols * ceiling(num_plots / cols)),
+                     ncol = cols, nrow = ceiling(num_plots / cols))
   }
   if (num_plots == 1) {
     print(plots[[1]])
