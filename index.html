@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>gsmisc by gschofl</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>gsmisc</h1>
+        <p>My miscellaneous R conveniance functions</p>
+
+        <p class="view"><a href="https://github.com/gschofl/gsmisc">View the Project on GitHub <small>gschofl/gsmisc</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/gschofl/gsmisc/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/gschofl/gsmisc/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/gschofl/gsmisc">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a id="gsmisc" class="anchor" href="#gsmisc" aria-hidden="true"><span class="octicon octicon-link"></span></a>gsmisc</h1>
+
+<p>Various utility functions that I reuse in different packages or on which I rely when using R interactively.</p>
+
+<p>The easiest way to install <code>gsmisc</code> is with devtools:</p>
+
+<div class="highlight highlight-R"><pre>library(<span class="pl-vo">devtools</span>)
+install_github(<span class="pl-s1"><span class="pl-pds">"</span>gschofl/gsmisc<span class="pl-pds">"</span></span>)</pre></div>
+
+<h2>
+<a id="tools" class="anchor" href="#tools" aria-hidden="true"><span class="octicon octicon-link"></span></a>Tools</h2>
+
+<p>Available function include:</p>
+
+<ul>
+<li>Tests and assertions: <code>is.empty()</code>, <code>are_empty()</code>, <code>all_empty()</code>
+</li>
+<li>Various string utilities: <code>wrap()</code>, <code>trim()</code>, <code>dup()</code>, <code>pad()</code>, <code>split_path()</code>
+</li>
+<li>
+<code>strsplitN()</code>: Extract the Nth substring from a vector of strings.</li>
+<li>
+<code>strip_ext()</code> and <code>replace_ext()</code> to handle file extensions.</li>
+<li>Partial function evaluation and function composition: <code>Partial()</code>, <code>Compose()</code>
+</li>
+<li>'default' operators: <code>%||%</code> and <code>%|%</code> (vectorised verison)</li>
+<li>
+<code>linebreak()</code>: format paragraphs.</li>
+<li>Apply XPath expressions to XML documents: <code>xvalue()</code>, <code>xname()</code>, <code>xattr()</code>, <code>xset()</code>
+</li>
+<li>Customized package installation: <code>install_packages()</code>, <code>update_packages()</code>
+</li>
+<li>Some convenience functions: <code>require.all()</code>, <code>load.all()</code>, <code>createProject()</code>
+</li>
+</ul>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/gschofl">gschofl</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
