@@ -1,0 +1,114 @@
+---
+title: '@title@'
+author: '@author@'
+date: '`r Sys.Date()`'
+output:
+  html_document:
+    fig_caption: true
+    highlight: kate
+    number_sections: true
+    theme: spacelab
+    toc: true
+    css: resources/custom.css
+    includes:
+      before_body: resources/header.html
+---
+
+```{r setup, include=FALSE}
+library("ProjectTemplate")
+library("data.table")
+library("knitr")
+library("pander")
+opts_knit$set(root.dir = '..', output.dir = '.', verbose = TRUE, width = 80)
+wd <- basename(getwd())
+if (wd %in% c("src", "doc", "reports")) {
+  setwd('..')
+}
+options(xtable.type = "html")
+load.project()
+```
+
+# Einführung
+
+## Hintergrund
+
+Das ist ein R Markdown Dokument. Markdown ist ein einfache
+Formatierungssyntax um HTML, PDF, oder DOCX Dokumente
+zu generieren.
+
+Wir können Sternchen verwenden um Text *kursiv* oder **fett** 
+zu formatieren.
+
+Wir erzeugen Listen mit Bindestrichen, Pluszeichen oder Sternchen:
+
+- Punkt 1
+- Punkt 2
+- Punkt 3
+
+Wir können `Inline`-Code mit dem Gravis darstellen, und 
+R Codeblöcke einbetten:
+```{r, echo=TRUE}
+summary(cars)
+```
+
+Ebenso wie Tabellen generieren:
+```{r, echo=TRUE, results='asis'}
+pandoc.table(head(airquality))
+```
+
+oder Graphiken erstellen:
+```{r qplot, fig.width=4, fig.height=3, message=FALSE}
+library("ggplot2")
+qplot(speed, dist, data = cars) +
+  geom_smooth()
+```
+
+> Blockquotes sind eingerückt.
+
+Verbatim Codeblöcke können erzeugt werden indem wir den Text
+4 Leerzeichen einrücken:
+
+    if (a > 3) {
+      moveShip(5 * gravity, DOWN);
+    }
+
+
+Wir können auch [Links](http://rmarkdown.rstudio.com/authoring_basics.html) setzen,
+und LaTeX-Gleichungen erstellen:
+$$
+\bar x = \frac{1}{n} \sum_{i=i}^{n} x_{i}
+$$
+
+
+Außerdem funktionieren hochgestellte, x^2^, und tiefgestellte, CO~2~, Zeichen.
+
+In der Pandoc-Erweiterung der Markdownsyntax sind Mehrzeilentabellen möglich:
+
+-------------------------------------------------------------
+ Centered   Default           Right Left
+  Header    Aligned         Aligned Aligned
+----------- ------- --------------- -------------------------
+   First    row                12.0 Example of a row that
+                                    spans multiple lines.
+
+  Second    row                 5.0 Here's another one. Note
+                                    the blank line between
+                                    rows.
+-------------------------------------------------------------
+
+Table: Here's the caption. It, too, may span
+multiple lines.
+
+## Zielstellung
+
+# Analyse
+
+## Datengrundlage
+
+## Problem 1
+
+## Problem 2
+
+# Bewertung
+
+# Anhänge
