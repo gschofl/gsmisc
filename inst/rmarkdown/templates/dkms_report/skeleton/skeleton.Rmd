@@ -1,17 +1,31 @@
 ---
 title: '@title@'
 author: '@author@'
-date: '`r Sys.Date()`'
+date: "`r Sys.Date()`"
 output:
   html_document:
-    fig_caption: true
-    highlight: kate
-    number_sections: true
-    theme: spacelab
-    toc: true
-    css: resources/custom.css
+    css:
+    - resources/custom.css
+    fig_caption:
+    - yes
+    highlight:
+    - kate
     includes:
-      before_body: resources/header.html
+      before_body:
+      - resources/header.html
+    number_sections:
+    - yes
+    theme:
+    - spacelab
+    toc:
+    - yes
+  word_document:
+    fig_caption:
+    - yes
+    highlight:
+    - tango
+    reference_docx:
+    - resources/template.docx
 ---
 
 ```{r setup, include=FALSE}
@@ -72,13 +86,11 @@ Verbatim Codeblöcke können erzeugt werden indem wir den Text
       moveShip(5 * gravity, DOWN);
     }
 
-
 Wir können auch [Links](http://rmarkdown.rstudio.com/authoring_basics.html) setzen,
 und LaTeX-Gleichungen erstellen:
 $$
 \bar x = \frac{1}{n} \sum_{i=i}^{n} x_{i}
 $$
-
 
 Außerdem funktionieren hochgestellte, x^2^, und tiefgestellte, CO~2~, Zeichen.
 
