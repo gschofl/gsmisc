@@ -17,18 +17,14 @@ wrap <- function(x, wrap = '"') {
 
 #' Trim elements
 #' 
-#' @param x A vector.
-#' @param trim A pattern to trim from vector elements
+#' @inheritParams base::trimws
 #' @return A vector with trimmed strings
 #' @family string-utils
 #' @export
 #' @examples
 #' x <- " abc\n\t" 
 #' trim(x)
-trim <- function(x, trim = '\\s+') {
-  stopifnot(is.vector(x))
-  gsub(paste0("^", trim, "|", trim, "$"), '', x)
-}
+trim <- base::trimws
 
 #' Duplicate a character string n times.
 #' 
@@ -180,5 +176,5 @@ replace_ext <- function(file, replacement = "", sep = "\\.", level = 0) {
     replacement <- usplit(replacement, split="^\\.")[2L]
   }
   paste(strip_ext(file = file, sep = sep, level = level), replacement,
-        sep=gsub("\\", "", sep, fixed=TRUE))  
+        sep = gsub("\\", "", sep, fixed=TRUE))  
 }

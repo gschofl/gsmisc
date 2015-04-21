@@ -4,8 +4,8 @@ recursive_loading: FALSE
 munging: TRUE
 logging: FALSE
 load_libraries: TRUE
-libraries: gsmisc, magrittr, reshape2, plyr, grid, ggplot2, data.table, xtable
+libraries: gsmisc, magrittr, tidyr, dplyr, grid, ggplot2, data.table, foreach, iterators, doParallel
 as_factors: FALSE
 data_tables: TRUE
 version: 0.6
-attach_internal_libraries: TRUE
+attach_internal_libraries: FALSE
