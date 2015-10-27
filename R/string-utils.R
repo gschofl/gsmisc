@@ -81,8 +81,8 @@ pad <- function(x, n = 10, where = 'left', pad = ' ') {
 #' @param n Vector of elements to be returned.
 #' @param from One of \sQuote{start} or \sQuote{end}. From which direction do
 #' we count the pieces.
-#' @param collapse
-#' @param ... Arguments passed on to \code{\link{strsplit}}.
+#' @param collapse an optional character string to separate the results.
+#' @param \dots Arguments passed on to \code{\link{strsplit}}.
 #' @return A character vector.
 #' @family string-utils
 #' @export

@@ -203,7 +203,7 @@ createProject <- function(project = "myProject",
 #'    createPackage("utils", use_rcpp = TRUE)  
 #' }
 #' 
-createPackage <- function(name = "dkms.utils", path = getOption("gsmisc.devel"),
+createPackage <- function(name, path = getOption("gsmisc.devel"),
                           use_test = TRUE, use_doc = TRUE, use_rcpp = FALSE,
                           use_travis = FALSE, use_vignette = FALSE) {
   pkg <- normalizePath(file.path(path, name), mustWork = FALSE)

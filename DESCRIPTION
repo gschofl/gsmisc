@@ -52,3 +52,4 @@ Collate:
     'tanken.R'
     'xml-utils.R'
 VignetteBuilder: knitr
+RoxygenNote: 4.1.1.9001

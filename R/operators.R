@@ -25,7 +25,7 @@ NULL
 }
 
 #' @details \code{\%|\%} is a vectorized version of \code{\%||\%}
-#' @rdname default_ops 
+#' @rdname default_ops
 #' @export
 "%|%" <- function (a, b, filter = "are_empty") {
   filter <- match.fun(filter)
@@ -34,20 +34,20 @@ NULL
 
 #' @usage a \%|na|\% b
 #' @details \code{\%|na|\%} returns the RHS if the LHS evaluates to \code{NA}
-#' @rdname default_ops 
+#' @rdname default_ops
 #' @export
 "%|na|%" <- Partial(`%||%`, filter = "is.na")
 
 #' @usage a \%|NA|\% b
 #' @details \code{\%|NA|\%} is a vectorized version of \code{\%|na|\%}
-#' @rdname default_ops 
+#' @rdname default_ops
 #' @export
 "%|NA|%" <- Partial(`%|%`, filter = "is.na")
 
 #' @usage a \%|null|\% b
 #' @details \code{\%|null|\%} explicitly works only on \code{NULL} but
 #' not empty strings and vectors.
-#' @rdname default_ops 
+#' @rdname default_ops
 #' @export
 "%|null|%" <- Partial(`%||%`, filter = "is.null")
 
