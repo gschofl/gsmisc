@@ -9,7 +9,7 @@ latex(df, caption = NULL, label = NULL, align = NULL, digits = NULL,
 }
 \arguments{
 \item{caption}{Character vector of length 1 or 2 containing the
-    table's caption or title.  If length 2, the second item is the
+    table's caption or title.  If length is 2, the second item is the
     "short caption" used when LaTeX generates a "List of Tables". Set to
     \code{NULL} to suppress the caption.  Default value is \code{NULL}. }
 
@@ -18,7 +18,7 @@ latex(df, caption = NULL, label = NULL, align = NULL, digits = NULL,
     value is \code{NULL}. }
 
 \item{align}{Character vector of length equal to the number of columns
-    of the resulting table indicating the alignment of the corresponding
+    of the resulting table, indicating the alignment of the corresponding
     columns.  Also, \code{"|"} may be used to produce vertical lines
     between columns in LaTeX tables, but these are effectively ignored
     when considering the required length of the supplied vector.  If a
@@ -28,7 +28,7 @@ latex(df, caption = NULL, label = NULL, align = NULL, digits = NULL,
     one greater than \code{ncol(x)} if \code{x} is a
     \code{data.frame}. Use \code{"l"}, \code{"r"}, and \code{"c"} to
     denote left, right, and center alignment, respectively.  Use
-    \code{"p\{3cm\}"} etc for a LaTeX column of the specified width. For
+    \code{"p{3cm}"} etc. for a LaTeX column of the specified width. For
     HTML output the \code{"p"} alignment is interpreted as \code{"l"},
     ignoring the width request. Default depends on the class of
     \code{x}. }
@@ -37,18 +37,18 @@ latex(df, caption = NULL, label = NULL, align = NULL, digits = NULL,
     Numeric vector of length equal to one (in which case it will be
     replicated as necessary) or to the number of columns of the
     resulting table \bold{or} matrix of the same size as the resulting
-    table indicating the number of digits to display in the
+    table, indicating the number of digits to display in the
     corresponding columns. Since the row names are printed in the first
     column, the length of the vector \code{digits} or the number of
     columns of the matrix \code{digits} is one greater than
     \code{ncol(x)} if \code{x} is a \code{data.frame}. Default depends
-    of class of \code{x}. If values of \code{digits} are negative, the
+    on the class of \code{x}. If values of \code{digits} are negative, the
     corresponding values of \code{x} are displayed in scientific format
     with \code{abs(digits)} digits.}
 
 \item{display}{
     Character vector of length equal to the number of columns of the
-    resulting table indicating the format for the corresponding columns.
+    resulting table, indicating the format for the corresponding columns.
     Since the row names are printed in the first column, the length of
     \code{display} is one greater than \code{ncol(x)} if \code{x} is a
     \code{data.frame}.  These values are passed to the \code{formatC}
@@ -75,6 +75,5 @@ to make it easy to use in "Rmarkdown" dokuments.
 \details{
 The output style (LaTeX or HTML) is controlled via the option
 \code{options(xtable.type = "latex")} or \code{options(xtable.type = "html")}
-
 }
 

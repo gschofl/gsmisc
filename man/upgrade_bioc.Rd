@@ -12,8 +12,6 @@ and upgrades all currently installed packages to the latest
 repositories for this version of R.
 }
 \details{
-
 Wraps \code{biocLite("BiocUpgrade")}
-
 }
 

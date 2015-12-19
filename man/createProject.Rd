@@ -32,7 +32,7 @@ Create a modified \href{http://projecttemplate.net/getting_started.html}{Project
 project.
 }
 \details{
- If the target directory does not exist, it is created.  Otherwise,
+If the target directory does not exist, it is created.  Otherwise,
   it can only contain files and directories allowed by the merge strategy.
 }
 \note{
