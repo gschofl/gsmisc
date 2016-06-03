@@ -5,7 +5,7 @@ NULL
 #' 
 #' \code{compact} filters \code{NULL} elments from a list; \code{compactChar} filters
 #' empty strings (\code{""}) from a list (or vector); \code{compactNA} filters
-#' \code{NA}s and  \code{compactAll} filters all of the above.
+#' \code{NA}s.
 #' 
 #' @param x A vector or list.
 #' @return A vector or list with empty elements filtered out.
@@ -40,10 +40,4 @@ compactChar <- function(x) {
 compactNA <- function(x) {
   filter_na <- function(x) suppressWarnings(is.na(x)) %||% FALSE
   x[!vapply(x, filter_na, FALSE, USE.NAMES = FALSE)]
-}
-
-#' @rdname compact
-#' @export
-compactAll <- function(x) {
-  x[!vapply(x, are_empty, FALSE, USE.NAMES = FALSE)]
 }

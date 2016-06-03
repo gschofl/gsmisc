@@ -2,7 +2,6 @@
 % Please edit documentation in R/compact.R
 \name{compact}
 \alias{compact}
-\alias{compactAll}
 \alias{compactChar}
 \alias{compactNA}
 \title{Filter "empty" elements from a list.}
@@ -12,8 +11,6 @@ compact(x)
 compactChar(x)
 
 compactNA(x)
-
-compactAll(x)
 }
 \arguments{
 \item{x}{A vector or list.}
@@ -24,7 +21,7 @@ A vector or list with empty elements filtered out.
 \description{
 \code{compact} filters \code{NULL} elments from a list; \code{compactChar} filters
 empty strings (\code{""}) from a list (or vector); \code{compactNA} filters
-\code{NA}s and  \code{compactAll} filters all of the above.
+\code{NA}s.
 }
 \examples{
 l <- list(a=1, b=NULL, c=NA)

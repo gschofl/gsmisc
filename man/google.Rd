@@ -13,7 +13,7 @@ google(query = "", n = 10)
 }
 \value{
 Prints the URLs returned by Google Search to screen and invisibly
-returns a character vector of the URLs. 
+returns a character vector of the URLs.
 }
 \description{
 Use Google Search from the R command line.

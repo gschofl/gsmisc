@@ -18,13 +18,11 @@ Or(...)
 Predicates
 }
 \details{
-
 \code{And} returns a function that returns \code{TRUE} when all the arguments,
 applied to the returned function's arguments, returns \code{TRUE}.
 
 \code{Or} returns a function that returns \code{TRUE} when any the arguments,
 applied to the returned function's arguments, returns \code{TRUE}.
-
 }
 \seealso{
 Other Functionals: \code{\link{Call}},

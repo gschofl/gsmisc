@@ -15,7 +15,3 @@ test_that("'compactNA' filters only NA from lists and vectors", {
   expect_that(compactNA(list(NA)), equals( list() ))
 })
 
-test_that("'compactAll' filters all empty elements from lists", {
-  expect_that(compactAll(list(1,"",integer(),NULL,2)), equals( list(1,2) ))
-})
-
