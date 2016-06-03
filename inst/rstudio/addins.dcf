@@ -1,0 +1,9 @@
+Name: Insert %do%
+Description: Inserts `%do%` at the cursor position.
+Binding: insertDoAddin
+Interactive: false
+
+Name: Insert %||%
+Description: Inserts `%||%` at the cursor position.
+Binding: insertNCAddin
+Interactive: false
