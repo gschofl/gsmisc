@@ -1,11 +1,12 @@
+version: 0.7
 data_loading: TRUE
 cache_loading: TRUE
 recursive_loading: FALSE
 munging: TRUE
 logging: FALSE
+logging_level: INFO
 load_libraries: TRUE
-libraries: dplyr, tidyr, data.table, grid, ggplot2, foreach, iterators
+libraries: tidyverse, foreach, iterators
 as_factors: FALSE
 data_tables: FALSE
-version: 0.6
 attach_internal_libraries: FALSE
