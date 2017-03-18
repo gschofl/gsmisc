@@ -17,4 +17,3 @@ db_create(dbName, dbSchema = "", overwrite = FALSE)
 Create an SQLite database.
 }
 \keyword{internal}
-

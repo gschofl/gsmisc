@@ -17,4 +17,3 @@ db_bulk_insert(con, tbl, df)
 Bulk insert a data.frame into a db table
 }
 \keyword{internal}
-

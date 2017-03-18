@@ -15,4 +15,3 @@ db_count(con, tbl)
 Count rows in a db table
 }
 \keyword{internal}
-

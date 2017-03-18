@@ -2,8 +2,8 @@
 % Please edit documentation in R/functional.R
 \name{Compose}
 \alias{Compose}
-\alias{Sequence}
 \alias{\%.\%}
+\alias{Sequence}
 \title{Compose multiple functions.}
 \usage{
 Compose(...)
@@ -40,4 +40,3 @@ Other Functionals: \code{\link{And}}, \code{\link{Call}},
   \code{\link{Log_to}}, \code{\link{Maybe}},
   \code{\link{Partial}}
 }
-

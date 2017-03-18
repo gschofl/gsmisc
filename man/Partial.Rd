@@ -33,4 +33,3 @@ Other Functionals: \code{\link{And}}, \code{\link{Call}},
   \code{\link{Fail_with}}, \code{\link{Log_to}},
   \code{\link{Maybe}}
 }
-

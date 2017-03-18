@@ -17,4 +17,3 @@ cannot be loaded.
 \seealso{
 \code{\link[base]{require}}
 }
-

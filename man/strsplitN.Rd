@@ -48,4 +48,3 @@ Other string-utils: \code{\link{blanks}},
   \code{\link{strip_ext}}, \code{\link{trim}},
   \code{\link{wrap}}
 }
-

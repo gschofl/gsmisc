@@ -15,4 +15,3 @@ has_tables(con, tbl)
 Check if a SQLite database has specified tables
 }
 \keyword{internal}
-

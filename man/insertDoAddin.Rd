@@ -9,4 +9,3 @@ insertDoAddin()
 \description{
 Call this function as an addin to insert \code{ \%do\% } at the cursor position.
 }
-

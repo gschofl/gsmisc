@@ -25,4 +25,3 @@ Other Operators: \code{\link{\%n~\%}}, \code{\link{\%~\%}}
 
 Other Operators: \code{\link{\%n~\%}}, \code{\link{\%~\%}}
 }
-

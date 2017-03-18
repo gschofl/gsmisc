@@ -24,4 +24,3 @@ directory.
 \seealso{
 Inspired by \href{http://stackoverflow.com/questions/18426726/system-open-rstudio-close-connection}{this} question on stackoverflow
 }
-

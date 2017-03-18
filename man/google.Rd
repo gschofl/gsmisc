@@ -24,4 +24,3 @@ r <- google("use google from command line")
 browseURL(r[1])
 }
 }
-

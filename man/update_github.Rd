@@ -14,4 +14,3 @@ Prompts for which of the following packages you want to install:
 \seealso{
 Other Installers: \code{\link{install_packages}}
 }
-

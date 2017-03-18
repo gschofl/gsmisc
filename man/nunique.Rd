@@ -14,4 +14,3 @@ nunique(x, ...)
 \description{
 A wrapper around \code{length(unique(x))}
 }
-

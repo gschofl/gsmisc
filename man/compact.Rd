@@ -38,4 +38,3 @@ compactNA(l)
 ## $b
 ## NULL
 }
-

@@ -27,4 +27,3 @@ Other string-utils: \code{\link{blanks}},
   \code{\link{strsplitN}}, \code{\link{trim}},
   \code{\link{wrap}}
 }
-

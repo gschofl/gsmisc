@@ -76,4 +76,3 @@ to make it easy to use in "Rmarkdown" dokuments.
 The output style (LaTeX or HTML) is controlled via the option
 \code{options(xtable.type = "latex")} or \code{options(xtable.type = "html")}
 }
-

@@ -24,4 +24,3 @@ Other Tests: \code{\link{are_null}},
   \code{\link{is.empty}}, \code{\link{is.installed}},
   \code{\link{is.scalar}}
 }
-

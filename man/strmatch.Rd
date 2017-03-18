@@ -32,4 +32,3 @@ Extract matched group(s) from a string.
 ##
 }
 \keyword{character}
-

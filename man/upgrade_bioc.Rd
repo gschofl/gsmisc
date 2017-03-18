@@ -14,4 +14,3 @@ repositories for this version of R.
 \details{
 Wraps \code{biocLite("BiocUpgrade")}
 }
-

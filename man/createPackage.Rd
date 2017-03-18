@@ -36,4 +36,3 @@ Called for its side effects. Opens a new instance of Rstudio in
 }
 
 }
-

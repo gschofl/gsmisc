@@ -7,11 +7,11 @@
 usplit(x, split, ...)
 }
 \arguments{
+\item{\dots}{Arguments passed on to \code{\link{strsplit}}.}
+
 \item{x}{Character vector to be split.}
 
 \item{split}{The regexp to split on.}
-
-\item{\dots}{Arguments passed on to \code{\link{strsplit}}.}
 }
 \description{
 unlist(strsplit(x, split, ...))
@@ -19,4 +19,3 @@ unlist(strsplit(x, split, ...))
 \examples{
 usplit("a.b.c", ".", fixed = TRUE)
 }
-

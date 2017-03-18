@@ -23,4 +23,3 @@ A pattern matching operator.
 \seealso{
 Other Operators: \code{\link{\%<~\%}}, \code{\link{\%n~\%}}
 }
-

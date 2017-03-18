@@ -20,4 +20,3 @@ cache$exists("b")
 cache$exists("c")
 cache$rm()     
 }
-

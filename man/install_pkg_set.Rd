@@ -14,4 +14,3 @@ Different sets of packages:
 \code{base}, \code{datatools}, \code{hadleyverse}, \code{stats},
 \code{phlyo}, \code{bioc}.
 }
-

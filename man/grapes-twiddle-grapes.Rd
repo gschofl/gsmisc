@@ -17,4 +17,3 @@ Matching elements in \code{target}
 \description{
 A simple pattern matching operator.
 }
-

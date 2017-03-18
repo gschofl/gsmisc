@@ -24,4 +24,3 @@ This function is taken from the help page for \code{\link[methods]{classesToAM}}
 plotInheritance(getClasses("package:Rentrez"))
 }
 }
-

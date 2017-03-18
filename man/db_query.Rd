@@ -17,4 +17,3 @@ db_query(con, stmt, j = NA)
 Query an SQLite database.
 }
 \keyword{internal}
-

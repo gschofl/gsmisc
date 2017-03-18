@@ -27,4 +27,3 @@ gsmisc <- as.package("~/R/Projects/Devel/gsmisc")
 with_cpp11(devtools::build(gsmisc))
 }
 }
-

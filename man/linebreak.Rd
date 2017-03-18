@@ -35,4 +35,3 @@ a character vector
 Similar to \code{\link{strwrap}} but returns a single string with
 linefeeds inserted
 }
-

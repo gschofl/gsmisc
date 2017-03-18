@@ -28,4 +28,3 @@ Other Operators: \code{\link{\%<~\%}}, \code{\link{\%~\%}}
 
 Other Operators: \code{\link{\%<~\%}}, \code{\link{\%~\%}}
 }
-

@@ -24,4 +24,3 @@ Other Tests: \code{\link{are_false}},
   \code{\link{has_command}}, \code{\link{is.empty}},
   \code{\link{is.scalar}}
 }
-

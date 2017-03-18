@@ -20,4 +20,3 @@ Prints head and tail of avector, list, matrix, or data.frame.
 \seealso{
 \code{\link{head}}, \code{link{tail}}.
 }
-

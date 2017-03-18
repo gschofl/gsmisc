@@ -20,4 +20,3 @@ A character vector of the names of objects created.
 Reload \code{RData} datasets. Wrapper for \code{\link[base]{load}}
 that attempts to load all datasets found in a directory.
 }
-

@@ -26,4 +26,3 @@ match fails
 \examples{
 ##
 }
-

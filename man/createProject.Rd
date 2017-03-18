@@ -40,4 +40,3 @@ This function is slightly modified code taken from the
   \code{\link[ProjectTemplate]{create.project}} function in John Myles White's
   \code{ProjectTemplate} package to allow me using my custom directory structure.
 }
-

@@ -21,4 +21,3 @@ Negation of the \code{\link{\%in\%}} operator.
 1:5 \%ni\% c(3,4,5)
 }
 \keyword{utilities}
-

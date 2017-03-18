@@ -23,4 +23,3 @@ Other Functionals: \code{\link{And}}, \code{\link{Call}},
   \code{\link{Fail_with}}, \code{\link{Maybe}},
   \code{\link{Partial}}
 }
-

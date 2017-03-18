@@ -13,4 +13,3 @@ db_info(con)
 Metadata for an SQLite database.
 }
 \keyword{internal}
-

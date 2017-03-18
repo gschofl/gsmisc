@@ -44,4 +44,3 @@ Plot IRanges
 \author{
 Vince Buffalo
 }
-

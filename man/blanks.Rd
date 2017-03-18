@@ -24,4 +24,3 @@ Other string-utils: \code{\link{dup}}, \code{\link{pad}},
   \code{\link{strip_ext}}, \code{\link{strsplitN}},
   \code{\link{trim}}, \code{\link{wrap}}
 }
-

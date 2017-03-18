@@ -13,4 +13,3 @@ db_disconnect(...)
 Disconnect from an SQLite database.
 }
 \keyword{internal}
-

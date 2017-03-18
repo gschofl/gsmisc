@@ -17,4 +17,3 @@ db_connect(dbName, message = "", create = FALSE)
 Connect to an existing SQLite database.
 }
 \keyword{internal}
-

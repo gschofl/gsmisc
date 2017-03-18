@@ -21,4 +21,3 @@ Other Functionals: \code{\link{And}}, \code{\link{Call}},
   \code{\link{Log_to}}, \code{\link{Maybe}},
   \code{\link{Partial}}
 }
-

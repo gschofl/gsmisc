@@ -34,4 +34,3 @@ this function also downloads and untars the source files to \code{destdir}.
 \seealso{
 Other Installers: \code{\link{update_github}}
 }
-

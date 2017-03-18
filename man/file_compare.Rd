@@ -26,4 +26,3 @@ Otherwise return \code{FALSE}.
 \description{
 Compare local and remote file timestamp and/or size
 }
-
