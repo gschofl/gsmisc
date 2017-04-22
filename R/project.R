@@ -85,7 +85,6 @@ rproj <- function(pkg, path = "all") {
 #'   if \code{"allow.non.conflict"}, the method succeeds if no files or
 #'   directories with the same name exist in the target directory.
 #' @param open If \code{TRUE}, open the newly created project in RStudio.
-#' @param packrat If \code{TRUE}, create a \href{http://rstudio.github.io/packrat/walkthrough.html}{packrat} project.
 #' @return No value is returned; this function is called for its side effects.
 #' @details  If the target directory does not exist, it is created.  Otherwise,
 #'   it can only contain files and directories allowed by the merge strategy.
@@ -96,8 +95,7 @@ rproj <- function(pkg, path = "all") {
 createProject <- function(project = "myProject",
                           path = getOption("gsmisc.proj"),
                           merge_strategy = c("require.empty", "allow.non.conflict"),
-                          open = TRUE,
-                          packrat = FALSE) {
+                          open = TRUE) {
   if (!requireNamespace("ProjectTemplate", quietly = TRUE)) {
     stop("Please install ProjectTemplate", call. = FALSE)
   }
@@ -116,15 +114,10 @@ createProject <- function(project = "myProject",
   } else {
     .create_new_project(template_path, project_name)
   }
-  if (packrat) {
-    if (!requireNamespace("packrat", quietly = TRUE)) {
-      stop("Please install packrat", call. = FALSE)
-    }
-    packrat::init(project = project_name)
-  }
   if (open) {
     rproj(eval(project), path = path)
   }
+  invisible(NULL)
 }
 
 
@@ -182,49 +175,6 @@ createProject <- function(project = "myProject",
       stop(e)
     }
   )
-}
-
-#' Create a new package
-#' 
-#' \code{createPackage} is a simple wrapper around \code{\link[devtools]{create}}.
-#' 
-#' @param name Name of the package.
-#' @param path Location of the package.
-#' @param use_test Add testing infrastructure to the package.
-#' @param use_doc Add a roxygen template for package documentation.
-#' @param use_rcpp Add infrastructure for using \code{Rcpp}.
-#' @param use_travis Add a basic travis template.
-#' @param use_vignette Add a vignette template to the project.
-#' @return Called for its side effects. Opens a new instance of Rstudio in
-#'   the newly created package directory.
-#' @export
-#' @examples
-#' \dontrun{
-#'    createPackage("utils", use_rcpp = TRUE)  
-#' }
-#' 
-createPackage <- function(name, path = getOption("gsmisc.devel"),
-                          use_test = TRUE, use_doc = TRUE, use_rcpp = FALSE,
-                          use_travis = FALSE, use_vignette = FALSE) {
-  pkg <- normalizePath(file.path(path, name), mustWork = FALSE)
-  devtools::create(pkg, rstudio = TRUE)
-  if (use_test) {
-    devtools::use_testthat(pkg)
-  }
-  if (use_rcpp) {
-    devtools::use_rcpp(pkg)
-  }
-  if (use_travis) {
-    devtools::use_travis(pkg)
-  }
-  if (use_doc) {
-    devtools::use_package_doc(pkg)
-  }
-  if (use_vignette) {
-    devtools::use_vignette(name, pkg)
-  }
-  rproj <- file.path(pkg, paste0(name, ".Rproj"))
-  open_rstudio_project(rproj)
 }
 
 

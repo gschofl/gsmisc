@@ -44,15 +44,14 @@ Collate:
     'linebreak.R'
     'misc.R'
     'multiplot.R'
-    'packages.R'
     'plotIRanges.R'
+    'package.R'
     'project.R'
     'regexp-utils.R'
     'sqlite-utils.R'
     'string-utils.R'
     'strmatch.R'
     'system.R'
-    'tanken.R'
     'xml-utils.R'
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1
