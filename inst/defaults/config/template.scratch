@@ -1,0 +1,30 @@
+
+# add infrastructure ------------------------------------------------------
+
+# add packages to the Depends,Imports,Suggests fields in DESCRIPTION
+devtools::use_package("foreach", "Imports")
+
+# save package data to the right place
+devtools::use_data()
+
+# use data-raw to compute package datasets
+devtools::use_data_raw()
+
+# initialise a git repo
+devtools::use_git()
+
+# development -------------------------------------------------------------
+
+# document and install
+devtools::document()
+devtools::install()
+
+# run the examples
+devtools::run_examples()
+# run the unit tests
+devtools::test()
+# run the CRAN checks
+devtools::check()
+
+# playground --------------------------------------------------------------
+

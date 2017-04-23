@@ -4,7 +4,6 @@ cache_loading: TRUE
 recursive_loading: FALSE
 munging: TRUE
 logging: FALSE
-logging_level: INFO
 load_libraries: TRUE
 libraries: tidyverse, foreach, iterators
 as_factors: FALSE
