@@ -51,7 +51,8 @@ rproj <- function(pkg, path = "all") {
                  pkgs = normalizePath(pkgs.path),
                  normalizePath(path, mustWork = TRUE))
   
-  pkg_path <- grep(pkg, dir(path, full.names = TRUE, ignore.case = TRUE), value = TRUE)
+  pat <- paste0(pkg, "$")
+  pkg_path <- grep(pat, dir(path, full.names = TRUE, ignore.case = TRUE), value = TRUE)
   
   while (length(unique(basename(pkg_path))) > 1L) {
     pkg_path <- unique(dirname(pkg_path))
@@ -71,7 +72,7 @@ rproj <- function(pkg, path = "all") {
     cat(paste(Rproj.template, collapse = "\n"), file = rproj_loc)  
   }
   
-  open_rstudio_project(rproj_loc)
+  open_rstudio_project(rproj = rproj_loc)
 }
 
 #' Create a modified \href{http://projecttemplate.net/getting_started.html}{ProjectTemplate}
@@ -100,22 +101,21 @@ createProject <- function(project = "myProject",
     stop("Please install ProjectTemplate", call. = FALSE)
   }
   project_name <- normalizePath(file.path(path, project), mustWork = FALSE)
-  assert_that(is.writeable(dirname(project_name)))
+  assertthat::assert_that(assertthat::is.writeable(dirname(project_name)))
   template_name <- "template"
   temp_dir <- tempfile("ProjectTemplate")
   on.exit(unlink(temp_dir, recursive = TRUE), add = TRUE)
   untar(system.file(file.path("defaults", paste0(template_name, ".tar")), package = "gsmisc"),
         exdir = temp_dir, tar = "internal")
   template_path <- file.path(temp_dir, template_name)
-  
-  merge_strategy <- match.arg(merge_strategy)
+  merge_strategy <- match.arg(merge_strategy, c("require.empty", "allow.non.conflict"))
   if (file.exists(project_name) && file.info(project_name)$isdir) {
     .create_existing_project(template_path, project_name, merge_strategy)
   } else {
-    .create_new_project(template_path, project_name)
+      .create_new_project(template_path, project_name)
   }
   if (open) {
-    rproj(eval(project), path = path)
+    rproj(pkg = eval(project), path = path)
   }
   invisible(NULL)
 }
@@ -149,15 +149,6 @@ createProject <- function(project = "myProject",
 
   file.copy(from = system.file('defaults/config/template.rproject', package = 'gsmisc'),
             to = file.path(project.path, paste0(basename(project.path), '.Rproj')))
-  
-  file.copy(from = system.file('defaults/config/template.de.Rmd', package = 'gsmisc'),
-            to = file.path(project.path, 'reports/html_report.Rmd'))
-  
-  file.copy(from = system.file('defaults/config/template.bootstrap.de.Rmd', package = 'gsmisc'),
-            to = file.path(project.path, 'reports/bootstrap_report.Rmd'))
-  
-  file.copy(from = system.file('defaults/config/custom.css', package = 'gsmisc'),
-            to = file.path(project.path, 'reports/custom.css'))
 }
 
 .create_new_project <- function(template.path, project.name) {
